@@ -1,0 +1,94 @@
+# Copyright 2026 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+apiVersion: deploy.cloud.google.com/v1
+kind: Target
+metadata:
+  name: apf-staging
+description: Staging environment target
+run:
+  location: projects/YOUR_GCP_PROJECT_ID/locations/us-central1
+deployParameters:
+  project_id: YOUR_GCP_PROJECT_ID
+  cloud_location: us-central1
+  service_account: apf-stg-compute@YOUR_GCP_PROJECT_ID.iam.gserviceaccount.com
+  prefix: apf-stg
+  api_backend: https://apf-stg-api-YOUR_PROJECT_HASH.us-central1.run.app
+  agent_base_url: https://apf-stg-ai-YOUR_PROJECT_HASH.us-central1.run.app
+  app_url: https://apf-stg-ai-YOUR_PROJECT_HASH.us-central1.run.app
+  app_external_url: https://staging.example.com
+  artifact_bucket: apf-stg-artifacts
+  firestore_db_name: apf-stg-firestore
+  secret_encryption_public_key: apf-stg-secret-encryption-public-key
+  secret_encryption_private_key: apf-stg-secret-encryption-private-key
+  PERF_TEST_MODE: "true"
+  cloudsql_connection: YOUR_GCP_PROJECT_ID:us-central1:apf-stg-db-instance
+  cloudsql_user: apf-stg-adk-user
+  cloudsql_database: apf-stg-session-db
+  cloudsql_password_secret: apf-stg-db-password
+  session_service_type: "Database"
+  github_client_id: YOUR_GITHUB_CLIENT_ID
+  github_client_secret: apf-stg-github-client-secret
+  secrets_encryption_key: apf-stg-secrets-encryption-key
+  nfs_server: nfs.example.internal
+  nfs_path: /workspaces
+  network_interfaces: '[{""network"":""apf-stg-vpc"",""subnetwork"":""apf-stg-subnet-us-central""}]'
+  environment: production
+  bypass_iap_validation: "false"
+  iap_audience: "/projects/YOUR_PROJECT_NUMBER/global/backendServices/YOUR_BACKEND_SERVICE_ID"
+  jwt_secret: apf-stg-jwt-secret
+  super_admin_emails: apf-stg-super-admin-emails
+  perf_test_key: apf-stg-perf-test-key
+  container_concurrency: "80"
+---
+apiVersion: deploy.cloud.google.com/v1
+kind: Target
+metadata:
+  name: apf-production
+description: Production environment target
+requireApproval: true
+run:
+  location: projects/YOUR_GCP_PROJECT_ID/locations/us-central1
+deployParameters:
+  project_id: YOUR_GCP_PROJECT_ID
+  cloud_location: us-central1
+  service_account: apf-prod-compute@YOUR_GCP_PROJECT_ID.iam.gserviceaccount.com
+  prefix: apf-prod
+  api_backend: https://apf-prod-api-YOUR_PROJECT_HASH.us-central1.run.app
+  agent_base_url: https://apf-prod-ai-YOUR_PROJECT_HASH.us-central1.run.app
+  app_url: https://apf-prod-ai-YOUR_PROJECT_HASH.us-central1.run.app
+  app_external_url: https://app.example.com
+  artifact_bucket: apf-prod-artifacts
+  firestore_db_name: apf-prod-firestore
+  secret_encryption_public_key: apf-prod-secret-encryption-public-key
+  secret_encryption_private_key: apf-prod-secret-encryption-private-key
+  PERF_TEST_MODE: "false"
+  cloudsql_connection: YOUR_GCP_PROJECT_ID:us-central1:apf-prod-db-instance
+  cloudsql_user: apf-prod-adk-user
+  cloudsql_database: apf-prod-session-db
+  cloudsql_password_secret: apf-prod-db-password
+  session_service_type: "Database"
+  github_client_id: YOUR_GITHUB_CLIENT_ID
+  github_client_secret: apf-prod-github-client-secret
+  secrets_encryption_key: apf-prod-secrets-encryption-key
+  nfs_server: nfs.example.internal
+  nfs_path: /workspaces
+  network_interfaces: '[{""network"":""apf-prod-vpc"",""subnetwork"":""apf-prod-subnet-us-central""}]'
+  environment: production
+  bypass_iap_validation: "false"
+  iap_audience: "/projects/YOUR_PROJECT_NUMBER/global/backendServices/YOUR_BACKEND_SERVICE_ID"
+  jwt_secret: apf-prod-jwt-secret
+  super_admin_emails: apf-prod-super-admin-emails
+  perf_test_key: apf-prod-perf-test-key
+  container_concurrency: "80"

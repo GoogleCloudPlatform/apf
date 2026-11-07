@@ -1,0 +1,217 @@
+# Copyright 2026 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+steps:
+  # Read version from version.json
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    id: 'read-version'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        VERSION=$$(sed -n 's/.*"version": *"\([^"]*\)".*/\1/p' version.json)
+        echo "$$VERSION" > /workspace/version.txt
+        cp version.json api/version.json
+        echo "Parsed version is: $$VERSION"
+    waitFor: ['-']
+
+  # Apply Cloud Deploy core delivery pipeline configurations
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    id: 'apply-deploy-config'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        gcloud deploy apply --file=infra/cicd/base/pipelines.yaml --region=${_REGION}
+    waitFor: ['-']
+
+  # Build UI with Kaniko
+  - name: 'gcr.io/kaniko-project/executor:latest'
+    id: 'build-ui'
+    args:
+      - --destination=${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPO_NAME}/apf-ui:latest
+      - --context=dir://./ui
+
+  # Build API with Kaniko
+  - name: 'gcr.io/kaniko-project/executor:latest'
+    id: 'build-api'
+    args:
+      - --destination=${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPO_NAME}/apf-api:latest
+      - --context=dir://.
+      - --dockerfile=api/Dockerfile
+    waitFor: ['-']
+
+  # Build AI with Kaniko
+  - name: 'gcr.io/kaniko-project/executor:latest'
+    id: 'build-ai'
+    args:
+      - --destination=${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPO_NAME}/apf-ai:latest
+      - --context=dir://.
+      - --dockerfile=ai/Dockerfile
+    waitFor: ['-']
+
+  # Tag UI Image with version
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    id: 'tag-ui-version'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        VERSION=$$(cat /workspace/version.txt)
+        gcloud container images add-tag \
+          "${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPO_NAME}/apf-ui:latest" \
+          "${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPO_NAME}/apf-ui:v$${VERSION}"
+    waitFor: ['build-ui', 'read-version']
+
+  # Tag API Image with version
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    id: 'tag-api-version'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        VERSION=$$(cat /workspace/version.txt)
+        gcloud container images add-tag \
+          "${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPO_NAME}/apf-api:latest" \
+          "${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPO_NAME}/apf-api:v$${VERSION}"
+    waitFor: ['build-api', 'read-version']
+
+  # Tag AI Image with version
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    id: 'tag-ai-version'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        VERSION=$$(cat /workspace/version.txt)
+        gcloud container images add-tag \
+          "${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPO_NAME}/apf-ai:latest" \
+          "${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPO_NAME}/apf-ai:v$${VERSION}"
+    waitFor: ['build-ai', 'read-version']
+
+  # Create release for UI Service
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    id: 'create-release-ui'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        VERSION=$$(cat /workspace/version.txt)
+        VERSION_CLEAN=$$(echo "$$VERSION" | tr '.' '-')
+        
+        gcloud deploy releases create "release-ui-v$${VERSION_CLEAN}" \
+          --delivery-pipeline=apf-ui-pipeline \
+          --region=${_REGION} \
+          --source=infra/cicd/base \
+          --skaffold-file=skaffold-ui.yaml \
+          --images="apf-ui=${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPO_NAME}/apf-ui:v$${VERSION}" 2>err.log || {
+            EXIT_CODE=$$?
+            if grep -q "ALREADY_EXISTS" err.log; then
+              echo "Release 'release-ui-v$${VERSION_CLEAN}' already exists. Skipping release creation gracefully."
+              exit 0
+            else
+              cat err.log
+              exit $$EXIT_CODE
+            fi
+          }
+    waitFor: ['tag-ui-version', 'apply-deploy-config']
+
+  # Create release for API Service
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    id: 'create-release-api'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        VERSION=$$(cat /workspace/version.txt)
+        VERSION_CLEAN=$$(echo "$$VERSION" | tr '.' '-')
+        
+        gcloud deploy releases create "release-api-v$${VERSION_CLEAN}" \
+          --delivery-pipeline=apf-api-pipeline \
+          --region=${_REGION} \
+          --source=infra/cicd/base \
+          --skaffold-file=skaffold-api.yaml \
+          --images="apf-api=${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPO_NAME}/apf-api:v$${VERSION}" 2>err.log || {
+            EXIT_CODE=$$?
+            if grep -q "ALREADY_EXISTS" err.log; then
+              echo "Release 'release-api-v$${VERSION_CLEAN}' already exists. Skipping release creation gracefully."
+              exit 0
+            else
+              cat err.log
+              exit $$EXIT_CODE
+            fi
+          }
+    waitFor: ['tag-api-version', 'apply-deploy-config']
+
+  # Create release for AI Service
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    id: 'create-release-ai'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        VERSION=$$(cat /workspace/version.txt)
+        VERSION_CLEAN=$$(echo "$$VERSION" | tr '.' '-')
+        
+        gcloud deploy releases create "release-ai-v$${VERSION_CLEAN}" \
+          --delivery-pipeline=apf-ai-pipeline \
+          --region=${_REGION} \
+          --source=infra/cicd/base \
+          --skaffold-file=skaffold-ai.yaml \
+          --images="apf-ai=${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPO_NAME}/apf-ai:v$${VERSION}" 2>err.log || {
+            EXIT_CODE=$$?
+            if grep -q "ALREADY_EXISTS" err.log; then
+              echo "Release 'release-ai-v$${VERSION_CLEAN}' already exists. Skipping release creation gracefully."
+              exit 0
+            else
+              cat err.log
+              exit $$EXIT_CODE
+            fi
+          }
+    waitFor: ['tag-ai-version', 'apply-deploy-config']
+
+  # Create release for Cloud Run Jobs
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    id: 'create-release-jobs'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        VERSION=$$(cat /workspace/version.txt)
+        VERSION_CLEAN=$$(echo "$$VERSION" | tr '.' '-')
+        
+        gcloud deploy releases create "release-jobs-v$${VERSION_CLEAN}" \
+          --delivery-pipeline=apf-jobs-pipeline \
+          --region=${_REGION} \
+          --source=infra/cicd/base \
+          --skaffold-file=skaffold-jobs.yaml \
+          --images="apf-api=${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPO_NAME}/apf-api:v$${VERSION}" 2>err.log || {
+            EXIT_CODE=$$?
+            if grep -q "ALREADY_EXISTS" err.log; then
+              echo "Release 'release-jobs-v$${VERSION_CLEAN}' already exists. Skipping release creation gracefully."
+              exit 0
+            else
+              cat err.log
+              exit $$EXIT_CODE
+            fi
+          }
+    waitFor: ['tag-api-version', 'apply-deploy-config']
+
+substitutions:
+  _REGION: us-central1
+  _REPO_NAME: apf-stg-repo
+
+options:
+  machineType: 'E2_HIGHCPU_8'
+  logging: 'CLOUD_LOGGING_ONLY'

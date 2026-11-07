@@ -1,0 +1,44 @@
+{
+  "agents": [
+    {
+      "name": "APF Product Manager (John)",
+      "description": "Product manager persona (John) for PRD creation, requirements discovery, and scope management. Use when the user asks to talk to John or requests the product manager.",
+      "instructions": "Use fileReaderTool to load the product manager persona skill and follow it. The skill is located at .agents/skills/bmad-agent-pm/SKILL.md"
+    },
+    {
+      "name": "APF Create PRD",
+      "description": "Create, update, or validate a comprehensive PRD (Product Requirements Document). Use when the user says 'create a PRD', 'update PRD', 'design a PRD', or 'validate PRD'.",
+      "instructions": "Use fileReaderTool to load the prd skill and follow it. The skill is located at .agents/skills/bmad-prd/SKILL.md"
+    },
+    {
+      "name": "APF UX Designer (Sally)",
+      "description": "UX designer and UI specialist persona (Sally) responsible for wireframes, interaction workflows, design systems, and usability guidelines. Use when the user asks to talk to Sally or requests the UX designer.",
+      "instructions": "Use fileReaderTool to load the UX designer persona skill and follow it. The skill is located at .agents/skills/bmad-agent-ux-designer/SKILL.md"
+    },
+    {
+      "name": "APF UX Design",
+      "description": "Plan UX patterns, UI components, layout structures, and design specifications. Use when the user says 'lets create UX design', 'create UX specifications', or 'help me plan the UX'.",
+      "instructions": "Use fileReaderTool to load the UX design skill and follow it. The skill is located at .agents/skills/bmad-ux/SKILL.md"
+    },
+    {
+      "name": "APF Spec Distillation",
+      "description": "Distills intent into the SPEC kernel and companion documents: the canonical, preservation-validated contract for downstream development. Use when the user says 'create a spec', 'distill this into a spec', 'validate this spec', or 'update the spec'.",
+      "instructions": "Use fileReaderTool to load the spec skill and follow it. The skill is located at .agents/skills/bmad-spec/SKILL.md"
+    },
+    {
+      "name": "APF Test Design",
+      "description": "Creates comprehensive system-level or epic-level test plans, test strategies, and risk matrices. Use when the user says 'lets design test plan' or 'I want to create test strategy'.",
+      "instructions": "Use fileReaderTool to load the test design skill and follow it. The skill is located at .agents/skills/bmad-testarch-test-design/SKILL.md"
+    },
+    {
+      "name": "APF Review",
+      "description": "Multi-lens review engine over any diff, spec, doc, or artifact (adversarial, edge-case, verification-gap, structure, prose). Use when the user says \"review this\", \"critical review\", \"editorial review\", \"hunt edge cases\", \"review the structure\", or \"review the prose\".",
+      "instructions": "Use fileReaderTool to load the review skill and follow it. The skill is located at .agents/skills/bmad-review/SKILL.md"
+    },
+    {
+      "name": "APF BMad Help Subagent",
+      "description": "Analyzes current state and user query to answer BMad questions or recommend the next skill(s) to use. Use when user asks for help, bmad help, what to do next, or what to start with in BMad.",
+      "instructions": "Use fileReaderTool to load the bmad help skill and follow it. The skill is located at .agents/skills/bmad-help/SKILL.md"
+    }
+  ]
+}

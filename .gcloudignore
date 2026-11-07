@@ -1,0 +1,53 @@
+# Project Excludes
+docs
+workspaces
+**/workspaces/
+**/__debug*
+**/temp/
+
+api/api
+
+# from ui
+ui/build/
+ui/.dart_tool/
+ui/.idea/
+ui/linux/
+**/.next/
+
+
+.git
+.vscode
+tmp
+.env
+apf
+Makefile
+*.sh
+.github
+.devcontainer
+
+# Standard ignores
+.DS_Store
+**/node_modules/
+*.log
+
+
+# Terraform
+**/.terraform/
+.terraform/
+*.tfstate
+*.tfstate.backup
+*.tfvars
+*.tfvars.json
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraform.lock.hcl
+**/.terraform.lock.hcl
+
+
+# firestore
+.firebaserc
+.firebase.json
+firebase.json
+fire*debug.log

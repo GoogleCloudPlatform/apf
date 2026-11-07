@@ -1,0 +1,7 @@
+[
+  {
+    "displayName": "Help Guide",
+    "name": "bmad_help",
+    "description": "Inspects project state and recommends the next required or optional workflow step."
+  }
+]

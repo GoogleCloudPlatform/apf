@@ -1,0 +1,12 @@
+[
+  {
+    "id": "agent-antigravity",
+    "role": "Antigravity",
+    "persona": "Antigravity",
+    "description": "Autonomous AI agent powered by Antigravity.",
+    "color": "bg-indigo-500/10 text-indigo-700 border-indigo-200 dark:bg-indigo-500/20 dark:text-indigo-300 dark:border-indigo-800",
+    "icon": "🚀",
+    "skills": [],
+    "tools": []
+  }
+]

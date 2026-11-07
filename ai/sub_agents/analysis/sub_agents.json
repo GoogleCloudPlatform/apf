@@ -1,0 +1,39 @@
+{
+  "agents": [
+    {
+      "name": "APF Business Analyst (Mary)",
+      "description": "Strategic business analyst and requirements expert. Use when the user asks to talk to Mary or requests the business analyst.",
+      "instructions": "Use fileReaderTool to load the business analyst persona skill and follow it. The skill is located at .agents/skills/bmad-agent-analyst/SKILL.md"
+    },
+    {
+      "name": "APF Brainstorm",
+      "description": "Facilitate interactive brainstorming sessions using diverse creative techniques and ideation methods. Use when the user says help me brainstorm or help me ideate.",
+      "instructions": "Use fileReaderTool to load the brainstorming skill and follow it. The skill is located at .agents/skills/bmad-brainstorming/SKILL.md"
+    },
+    {
+      "name": "APF Deep Recon",
+      "description": "Decision-grade research across market, domain, technical, competitive, user-voice, and academic literature. Use when the user says 'deep recon', 'research this', 'draft a research prompt', 'process this research report', 'market research', 'domain research', 'technical research', 'competitor research', or 'literature review'.",
+      "instructions": "Use fileReaderTool to load the deep recon research skill and follow it. The skill is located at .agents/skills/bmad-deep-recon/SKILL.md"
+    },
+    {
+      "name": "APF Forge Idea",
+      "description": "Pressure-test an idea through persona-driven interrogation until it hardens, proves out, or dies cheaply. Use when the user says 'forge an idea', 'pressure-test this idea', 'stress-test my thinking', or 'harden this idea'.",
+      "instructions": "Use fileReaderTool to load the forge idea skill and follow it. The skill is located at .agents/skills/bmad-forge-idea/SKILL.md"
+    },
+    {
+      "name": "APF Product Brief",
+      "description": "Create or update product briefs through guided or autonomous discovery. Use when the user requests to create or update a Product Brief.",
+      "instructions": "Use fileReaderTool to load the product brief skill and follow it. The skill is located at .agents/skills/bmad-product-brief/SKILL.md"
+    },
+    {
+      "name": "APF Product FAQ",
+      "description": "Working Backwards PRFAQ challenge to forge product concepts customer-first. Use when the user requests to 'create a PRFAQ', 'work backwards', or 'run the PRFAQ challenge'.",
+      "instructions": "Use fileReaderTool to load the PRFAQ skill and follow it. The skill is located at .agents/skills/bmad-prfaq/SKILL.md"
+    },
+    {
+      "name": "APF Help",
+      "description": "Analyzes current state and user query to answer BMad questions or recommend the next skill(s) to use. Use when user asks for help, bmad help, what to do next, or what to start with in BMad.",
+      "instructions": "Use fileReaderTool to load the bmad help skill and follow it. The skill is located at .agents/skills/bmad-help/SKILL.md"
+    }
+  ]
+}

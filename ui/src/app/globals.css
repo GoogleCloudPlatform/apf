@@ -1,0 +1,241 @@
+/**
+ * Copyright 2026 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 48%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+/* Custom modern thin scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-muted-foreground/20 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-muted-foreground/40;
+}
+
+/* Sonner Toast Close Button Custom Position Override (Middle-Right Centered) */
+[data-sonner-toast] [data-close-button] {
+  left: auto !important;
+  right: 12px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+}
+
+/* Add safe right padding room inside toast bubbles to prevent content overlapping with the close button */
+[data-sonner-toast] {
+  padding-right: 38px !important;
+}
+
+/* Premium slow pulse breathing animation for onboarding highlights */
+@keyframes pulse-slow {
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    box-shadow: 0 0 12px rgba(168, 85, 247, 0.45);
+  }
+
+  50% {
+    opacity: 0.4;
+    transform: scale(1.005);
+    box-shadow: 0 0 4px rgba(168, 85, 247, 0.15);
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Subtle neon glowing border & snake animation for chat prompt input (runs once after 2s delay) */
+@keyframes neon-border-glow {
+  0% {
+    border-color: hsl(var(--input));
+    box-shadow: 0 0 0 0 transparent;
+  }
+  40% {
+    border-color: hsl(var(--primary) / 0.4);
+    box-shadow: 0 0 0 1px hsl(var(--primary) / 0.15), 0 0 6px 1px hsl(var(--primary) / 0.08);
+  }
+  60% {
+    border-color: hsl(var(--primary) / 0.55);
+    box-shadow: 0 0 0 1px hsl(var(--primary) / 0.2), 0 0 8px 1px hsl(var(--primary) / 0.12);
+  }
+  100% {
+    border-color: hsl(var(--input));
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+
+.animate-neon-glow-once {
+  animation: neon-border-glow 1.4s cubic-bezier(0.4, 0, 0.2, 1) 3s 1;
+}
+
+.animate-neon-glow-once-4s {
+  animation: neon-border-glow 2.8s cubic-bezier(0.4, 0, 0.2, 1) 4s 1;
+}
+
+@keyframes border-snake-fast {
+  0% {
+    stroke-dashoffset: 100;
+    opacity: 0;
+    filter: drop-shadow(0 0 2px hsl(var(--primary) / 0.4));
+  }
+  3% {
+    opacity: 0.75;
+    filter: drop-shadow(0 0 3px hsl(var(--primary) / 0.5)) drop-shadow(0 0 6px hsl(var(--primary) / 0.25));
+  }
+  50% {
+    opacity: 0.85;
+    filter: drop-shadow(0 0 4px hsl(var(--primary) / 0.6)) drop-shadow(0 0 8px hsl(var(--primary) / 0.3));
+  }
+  90% {
+    opacity: 0.75;
+    filter: drop-shadow(0 0 3px hsl(var(--primary) / 0.5)) drop-shadow(0 0 6px hsl(var(--primary) / 0.25));
+  }
+  100% {
+    stroke-dashoffset: -22;
+    opacity: 0;
+    filter: drop-shadow(0 0 0px transparent);
+  }
+}
+
+.animate-border-snake {
+  stroke-dasharray: 22 100;
+  stroke-dashoffset: 100;
+  opacity: 0;
+  animation: border-snake-fast 1.2s cubic-bezier(0.4, 0, 0.2, 1) 3s 1 forwards;
+}
+
+.animate-border-snake-4s {
+  stroke-dasharray: 22 100;
+  stroke-dashoffset: 100;
+  opacity: 0;
+  animation: border-snake-fast 2.6s cubic-bezier(0.4, 0, 0.2, 1) 4s 1 forwards;
+}
+
+/* React Flow Controls Dark Mode & Theme Alignment Fixes */
+.react-flow__controls {
+  background-color: hsl(var(--card)) !important;
+  border: 1px solid hsl(var(--border)) !important;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1) !important;
+}
+
+.react-flow__controls-button {
+  background-color: hsl(var(--card)) !important;
+  border-bottom: 1px solid hsl(var(--border)) !important;
+  color: hsl(var(--foreground)) !important;
+}
+
+.react-flow__controls-button:hover {
+  background-color: hsl(var(--muted)) !important;
+}
+
+.react-flow__controls-button:last-child {
+  border-bottom: none !important;
+}
+
+.react-flow__controls-button svg {
+  fill: currentColor !important;
+}
+
+.dark .react-flow__controls-button svg {
+  fill: hsl(var(--foreground)) !important;
+}

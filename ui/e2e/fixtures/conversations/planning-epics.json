@@ -1,0 +1,23 @@
+{
+  "tabName": "PLANNING",
+  "quickActionName": "Create Epics and Stories",
+  "description": "Conversation fixture for Planning phase Create Epics and Stories skill flow",
+  "fileNamePattern": ".*\\.md",
+  "turns": [
+    {
+      "turnIndex": 1,
+      "agentKeyword": "epic breakdown",
+      "userReply": "Break down Epic 9: Onboarding & Tours into user stories for showcase seeding."
+    },
+    {
+      "turnIndex": 2,
+      "agentKeyword": "acceptance criteria",
+      "userReply": "Add story 9.6 with acceptance criteria for full-screen loading overlay and toast notifications."
+    },
+    {
+      "turnIndex": 3,
+      "agentKeyword": "continue",
+      "userReply": "Continue"
+    }
+  ]
+}

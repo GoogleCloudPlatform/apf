@@ -1,0 +1,9 @@
+# Ignore binaries
+api
+__debug_bin*
+
+# Ignore local air temp files
+tmp/
+
+# Ignore git files if present in context
+.git

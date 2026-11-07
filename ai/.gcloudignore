@@ -1,0 +1,8 @@
+.vscode
+tmp
+workspaces
+.env
+apf
+Makefile
+*.sh
+__debug.*

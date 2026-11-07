@@ -1,0 +1,21 @@
+{
+  "name": "agentic-foundry-perf",
+  "version": "1.0.0",
+  "private": true,
+  "description": "k6 Performance Test Suite Scaffolding & Directory Structure",
+  "scripts": {
+    "perf:smoke": "k6 run scenarios/smoke_test.js",
+    "perf:load": "k6 run scenarios/load_test.js",
+    "perf:latency": "k6 run scenarios/latency_test.js",
+    "perf:onboarding": "k6 run scenarios/project_onboarding_load.js",
+    "perf:playwright": "NODE_PATH=../ui/node_modules ../ui/node_modules/.bin/playwright test --config=playwright.config.ts",
+    "perf:playwright:local-debug": "CONCURRENT_USERS=1 PLAYWRIGHT_WORKERS=1 NODE_PATH=../ui/node_modules ../ui/node_modules/.bin/playwright test --config=playwright.config.ts --headed",
+    "perf:playwright:local": "CONCURRENT_USERS=10 PLAYWRIGHT_WORKERS=2 NODE_PATH=../ui/node_modules ../ui/node_modules/.bin/playwright test --config=playwright.config.ts",
+    "perf:playwright:staging": "BASE_URL=https://staging.deltaproductfoundry.app CONCURRENT_USERS=50 PLAYWRIGHT_WORKERS=10 NODE_PATH=../ui/node_modules ../ui/node_modules/.bin/playwright test --config=playwright.config.ts",
+    "perf:playwright:stress": "BASE_URL=https://staging.deltaproductfoundry.app CONCURRENT_USERS=100 PLAYWRIGHT_WORKERS=20 NODE_PATH=../ui/node_modules ../ui/node_modules/.bin/playwright test --config=playwright.config.ts"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.45.0",
+    "k6-reporter": "^2.4.0"
+  }
+}

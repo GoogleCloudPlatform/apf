@@ -1,0 +1,82 @@
+[
+  {
+    "id": "showcase_project_context",
+    "title": "project-context.md",
+    "path": "docs/specs/project-context.md",
+    "phase": "ONBOARDING",
+    "status": "Complete",
+    "required": true,
+    "isCustom": false,
+    "artifactType": "project-context-doc"
+  },
+  {
+    "id": "showcase_brainstorming",
+    "title": "brainstorming-session.md",
+    "path": "docs/specs/plans/brainstorming-session.md",
+    "phase": "ANALYSIS",
+    "status": "In Progress",
+    "required": false,
+    "isCustom": false,
+    "artifactType": "brainstorming-session-doc"
+  },
+  {
+    "id": "showcase_brief",
+    "title": "brief.md",
+    "path": "docs/specs/plans/brief.md",
+    "phase": "ANALYSIS",
+    "status": "Complete",
+    "required": true,
+    "isCustom": false,
+    "artifactType": "product-brief-doc"
+  },
+  {
+    "id": "showcase_technical_research",
+    "title": "technical-research.md",
+    "path": "docs/specs/plans/technical-research.md",
+    "phase": "ANALYSIS",
+    "status": "Complete",
+    "required": true,
+    "isCustom": false,
+    "artifactType": "research-doc"
+  },
+  {
+    "id": "showcase_prd",
+    "title": "prd.md",
+    "path": "docs/specs/plans/prd.md",
+    "phase": "PLANNING",
+    "status": "Complete",
+    "required": true,
+    "isCustom": false,
+    "artifactType": "product-req-doc"
+  },
+  {
+    "id": "showcase_architecture",
+    "title": "architecture.md",
+    "path": "docs/specs/plans/architecture.md",
+    "phase": "SOLUTIONING",
+    "status": "Complete",
+    "required": true,
+    "isCustom": false,
+    "artifactType": "architecture-doc"
+  },
+  {
+    "id": "showcase_ux",
+    "title": "ux-design-specification.md",
+    "path": "docs/specs/plans/ux-design-specification.md",
+    "phase": "PLANNING",
+    "status": "Complete",
+    "required": true,
+    "isCustom": false,
+    "artifactType": "ux-design-doc"
+  },
+  {
+    "id": "showcase_epics",
+    "title": "epics.md",
+    "path": "docs/specs/plans/epics.md",
+    "phase": "SOLUTIONING",
+    "status": "In Progress",
+    "required": true,
+    "isCustom": false,
+    "artifactType": "epics-stories-doc"
+  }
+]

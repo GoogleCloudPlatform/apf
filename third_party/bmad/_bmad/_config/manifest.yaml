@@ -1,0 +1,48 @@
+installation:
+  version: 6.10.0
+  installDate: 2026-05-17T20:35:26.525Z
+  lastUpdated: 2026-08-09T20:39:30.100Z
+modules:
+  - name: core
+    version: 6.10.0
+    installDate: 2026-05-17T20:35:26.352Z
+    lastUpdated: 2026-08-09T20:39:30.087Z
+    source: built-in
+    npmPackage: null
+    repoUrl: null
+  - name: bmm
+    version: 6.10.0
+    installDate: 2026-05-17T20:35:26.253Z
+    lastUpdated: 2026-08-09T20:39:30.089Z
+    source: built-in
+    npmPackage: null
+    repoUrl: null
+  - name: bmb
+    version: v2.1.0
+    installDate: 2026-05-18T23:54:46.522Z
+    lastUpdated: 2026-08-09T20:39:30.092Z
+    source: external
+    npmPackage: bmad-builder
+    repoUrl: https://github.com/bmad-code-org/bmad-builder
+    channel: stable
+    sha: d54981a8ba3b990148256455ccf4e6c1cb4918f0
+  - name: tea
+    version: v1.21.8
+    installDate: 2026-06-19T12:19:22.494Z
+    lastUpdated: 2026-08-09T20:39:30.096Z
+    source: external
+    npmPackage: bmad-method-test-architecture-enterprise
+    repoUrl: https://github.com/bmad-code-org/bmad-method-test-architecture-enterprise
+    channel: stable
+    sha: 9360caa5972c09faacc515a44738c0b03e428e6b
+  - name: bmad-loop
+    version: v0.9.1
+    installDate: 2026-08-09T20:39:29.931Z
+    lastUpdated: 2026-08-09T20:39:30.100Z
+    source: external
+    npmPackage: null
+    repoUrl: https://github.com/bmad-code-org/bmad-loop
+    channel: stable
+    sha: 67aa8028a22eb96962c7579a917b2fbea7f9475a
+ides:
+  - antigravity

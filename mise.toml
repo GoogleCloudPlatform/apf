@@ -1,0 +1,264 @@
+# Copyright 2026 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+[tools]
+go = "1.26.1"
+python = "3.13"
+node = "20"
+java = "21"
+terraform = "latest"
+jq = "1.7.1"
+air = "latest"
+cloud-sql-proxy = "2.11.0"
+skaffold = "latest"
+k6 = "latest"
+
+[env]
+LOCAL_ARTIFACT_PATH = ".foundry/artifacts"
+
+[tasks.env-setup]
+description = "Setup developer environment, install tools, configure env vars, and package BMad (matches CONTRIBUTING.md)"
+run = "mise install && mise run configure-env-vars && mise run bmad:package ./ai/workspaces/config/bmad"
+
+[tasks.configure-env-vars]
+description = "Dynamically generate service .env files from root config.env"
+run = "./scripts/setup_env.sh"
+
+[tasks.dev-db]
+description = "Part 1: Start database containers (Postgres & Firestore) and seed data in detached background mode"
+run = "./scripts/start_db.sh"
+
+[tasks."db:setup-local"]
+description = "Alias for dev-db (Part 1: database containers & data seeding)"
+run = "mise run dev-db"
+
+[tasks."db:local"]
+description = "Alias for dev-db (Part 1: database containers & data seeding)"
+run = "mise run dev-db"
+
+[tasks.local-db]
+description = "Alias for dev-db (Part 1: database containers & data seeding)"
+run = "mise run dev-db"
+
+[tasks.dev-apps]
+description = "Part 2: Start all application related processes (Ai, Api, ADK, Ui)"
+run = "./scripts/start_apps.sh"
+raw = true
+
+[tasks.local-apps]
+description = "Alias for dev-apps (Part 2: application processes)"
+run = "mise run dev-apps"
+raw = true
+
+[tasks.local]
+description = "Spin up the entire local stack in 2 parts (Part 1: DB setup & seed -> Part 2: Application processes)"
+run = "./scripts/start_all.sh"
+raw = true
+
+[tasks.dev-all]
+description = "Spin up the entire local stack in 2 parts (Part 1: DB setup & seed -> Part 2: Application processes)"
+run = "./scripts/start_all.sh"
+raw = true
+
+[tasks.daily]
+description = "Synchronize environment variables and update dependencies"
+run = "mise run configure-env-vars && mise install"
+
+[tasks.clean]
+description = "Clean up lingering processes and remove database containers"
+run = "mise run kill-all && mise run db:session-clean"
+
+[tasks.kill-ai]
+description = "Kill Ai service on port 8080"
+run = "kill -9 $(lsof -t -i:8080) 2>/dev/null || true"
+
+[tasks.kill-api]
+description = "Kill Api service on port 8081"
+run = "kill -9 $(lsof -t -i:8081) 2>/dev/null || true"
+
+[tasks.kill-ui]
+description = "Kill Next.js UI service on port 8082"
+run = '''
+port=8082
+pid=$(lsof -t -i:$port 2>/dev/null || ss -lptn "sport = :$port" 2>/dev/null | grep -oP 'pid=\K\d+' | head -n 1)
+if [ -n "$pid" ]; then
+  ppid=$(ps -o ppid= -p $pid | tr -d ' ')
+  if [ -n "$ppid" ] && [ "$ppid" -ne 1 ]; then
+    gppid=$(ps -o ppid= -p $ppid | tr -d ' ')
+    if [ -n "$gppid" ] && [ "$gppid" -ne 1 ]; then
+      kill -9 $gppid 2>/dev/null || true
+    fi
+    kill -9 $ppid 2>/dev/null || true
+  fi
+  kill -9 $pid 2>/dev/null || true
+fi
+pkill -9 -f '[n]ext dev' 2>/dev/null || true
+'''
+
+[tasks.kill-pgadmin]
+description = "Kill pgAdmin service on port 8083"
+run = "kill -9 $(lsof -t -i:8083) 2>/dev/null || true"
+
+[tasks.kill-firebase]
+description = "Kill Firestore and Auth emulators and auxiliary suite ports (8084, 8085, 4000, 4400, 4500)"
+run = "kill -9 $(lsof -t -i:8084 -i:8085 -i:4000 -i:4400 -i:4500) 2>/dev/null || true"
+
+[tasks.kill-adk]
+description = "Kill ADK runner service on port 8086"
+run = "kill -9 $(lsof -t -i:8086) 2>/dev/null || true"
+
+
+[tasks.kill-all]
+description = "Force kill all background daemons on target ports and stop local DB"
+run = "mise run kill-ai && mise run kill-api && mise run kill-ui && mise run kill-firebase && mise run kill-pgadmin && mise run kill-adk && mise run db:session-stop"
+
+[tasks."db:session-start"]
+description = "Start local PostgreSQL session store database container"
+run = "./scripts/manage_db.sh start"
+
+[tasks."db:session-stop"]
+description = "Stop local PostgreSQL session store database container (keeps container)"
+run = "./scripts/manage_db.sh stop"
+
+[tasks."db:session-clean"]
+description = "Remove local PostgreSQL session store database container"
+run = "./scripts/manage_db.sh clean"
+
+[tasks."db:session-status"]
+description = "Status of local PostgreSQL session store database container"
+run = "./scripts/manage_db.sh status"
+
+[tasks."db:session-seed"]
+description = "Seed the PostgreSQL session store database (runs ai/seed/main.go)"
+run = "cd ai && go run seed/main.go"
+
+
+[tasks."db:proxy"]
+description = "Run Cloud SQL Proxy"
+run = "cloud-sql-proxy \"${CLOUDSQL_CONNECTION_NAME}\""
+
+[tasks."db:emulators"]
+description = "Start Firebase emulators and seed initial Firestore data (matches VSCode 'Start Local Firestore' launch config)"
+env = { FIRESTORE_EMULATOR_HOST = "localhost:8084", FIREBASE_AUTH_EMULATOR_HOST = "localhost:8085" }
+run = "sleep 3 && firebase emulators:start & sleep 10 && cd api && go run ./seeding -env local"
+
+[tasks."db:seed-local"]
+description = "Seed local Firestore database (emulator)"
+env = { FIRESTORE_EMULATOR_HOST = "localhost:8084", FIREBASE_AUTH_EMULATOR_HOST = "localhost:8085" }
+run = "cd api && go run ./seeding -env local"
+
+[tasks."db:seed-staging"]
+description = "Seed staging Firestore database"
+run = "cd api && go run ./seeding -env staging"
+
+[tasks."db:seed-prod"]
+description = "Seed production Firestore database"
+run = "cd api && go run ./seeding -env prod"
+
+
+[tasks.dev-api]
+description = "Run Go API backend (matches VSCode 'Api' launch config)"
+env = { FIRESTORE_EMULATOR_HOST = "localhost:8084", FIREBASE_AUTH_EMULATOR_HOST = "localhost:8085", LOCAL_ARTIFACT_PATH = ".foundry/artifacts" }
+run = "sleep 15 && cd api && go run ."
+
+[tasks.dev-ai]
+description = "Run Go AI backend (matches VSCode 'Ai' launch config)"
+env = { SERVICE_NAME = "apf", AGENT_LOADER_NAME = "super", ARTIFACT_SERVICE_TYPE = "File", LOCAL_ARTIFACT_PATH = ".foundry/artifacts" }
+run = "cd ai && go run . web --port 8080 -read-timeout 5m -write-timeout 5m api webui"
+
+[tasks.dev-ui]
+description = "Run Next.js React frontend (replaces legacy Flutter)"
+depends = ["kill-ui"]
+run = "cd ui && npm run dev"
+
+[tasks.dev-adk]
+description = "Run ADK Web UI on port 8086"
+depends = ["kill-adk"]
+run = "cd runners/adk && uv run adk web --port 8086 --reload --reload_agents ."
+
+[tasks."logs:adk"]
+description = "Tail ADK logs from logs/adk.log"
+run = "tail -f logs/adk.log"
+
+[tasks.test-playwright]
+description = "Run Playwright end-to-end browser UI tests"
+run = "cd ui && npx playwright test --ui"
+
+[tasks."bmad:package"]
+description = "Run the BMad packaging script"
+run = "go run third_party/bmad/package.go"
+
+[tasks."build:containers"]
+description = "Build all repository Docker containers (including apf-adk2-runner)"
+run = "./scripts/build_containers.sh"
+
+[tasks."perf:smoke"]
+description = "Run k6 baseline smoke test scenario"
+run = "mkdir -p logs && (cd perf && npm run perf:smoke) 2>&1 | tee -a logs/perf.log"
+
+[tasks."perf:smoke:staging"]
+description = "Run k6 smoke test scenario against staging environment with automatic IAP token provisioning"
+run = "STAGING_AUTH_TOKEN=\"${STAGING_AUTH_TOKEN:-$(./scripts/get_iap_token.sh)}\" TARGET_ENV=staging mise run perf:smoke"
+
+[tasks."perf:load"]
+description = "Run k6 load test scenario"
+run = "mkdir -p logs && (cd perf && npm run perf:load) 2>&1 | tee -a logs/perf.log"
+
+[tasks."perf:load:staging"]
+description = "Run 200 VU k6 load test scenario against staging environment with automatic IAP token provisioning"
+run = "STAGING_AUTH_TOKEN=\"${STAGING_AUTH_TOKEN:-$(./scripts/get_iap_token.sh)}\" TARGET_ENV=staging mise run perf:load"
+
+[tasks."perf:latency"]
+description = "Run k6 real-time latency test scenario"
+run = "mkdir -p logs && (cd perf && npm run perf:latency) 2>&1 | tee -a logs/perf.log"
+
+[tasks."perf:playwright:local"]
+description = "Run Playwright onboarding load test locally (10 users, 2 workers)"
+run = "cd perf && npm run perf:playwright:local"
+
+[tasks."perf:playwright:staging"]
+description = "Run Playwright onboarding load test against staging (50 users, 10 workers)"
+run = "cd perf && npm run perf:playwright:staging"
+
+[tasks."logs:perf"]
+description = "Tail performance test logs from logs/perf.log"
+run = "tail -f logs/perf.log"
+
+[tasks."cleanup:revisions"]
+description = "Remove stale Cloud Run revisions older than the last 5 versions (apf-stg-ui, apf-stg-ai, apf-stg-api)"
+run = "./scripts/cleanup_cloudrun_revisions.sh staging"
+
+[tasks."cleanup:revisions:staging"]
+description = "Remove stale Cloud Run revisions older than the last 5 versions for staging"
+run = "./scripts/cleanup_cloudrun_revisions.sh staging"
+
+[tasks."cleanup:revisions:prod"]
+description = "Remove stale Cloud Run revisions older than the last 5 versions for production"
+run = "./scripts/cleanup_cloudrun_revisions.sh prod"
+
+[tasks."cleanup:all"]
+description = "Remove stale Cloud Run revisions older than the last 5 versions for staging and production"
+run = "mise run cleanup:revisions:staging && mise run cleanup:revisions:prod"
+
+[tasks.addlicense]
+description = "Add license headers using addlicense, ignoring third_party and .gitignore files"
+run = '''
+git ls-files -z --cached --others --exclude-standard | grep -z -v -E '(^|/)third_party/' | while IFS= read -r -d '' f; do [ -f "$f" ] && printf '%s\0' "$f"; done | xargs -0 -r addlicense -c "Google LLC" -l apache "$@"
+'''
+
+[tasks."license:check"]
+description = "Check license headers using addlicense, ignoring third_party and .gitignore files"
+run = '''
+git ls-files -z --cached --others --exclude-standard | grep -z -v -E '(^|/)third_party/' | while IFS= read -r -d '' f; do [ -f "$f" ] && printf '%s\0' "$f"; done | xargs -0 -r addlicense -check "$@"
+'''

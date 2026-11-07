@@ -1,0 +1,18 @@
+{
+  "name": "Foundry Showcase",
+  "description": "Enterprise-grade autonomous pair programming platform enabling seamless collaboration between engineers and AI agents.",
+  "status": "Onboarded",
+  "visibility": "public",
+  "icon": "🚀",
+  "governanceGates": {
+    "ONBOARDING": "Complete",
+    "ANALYSIS": "In Progress",
+    "PLANNING": "Complete",
+    "SOLUTIONING": "In Progress",
+    "IMPLEMENTATION": "Not Started"
+  },
+  "app_integrations": ["gemini"],
+  "linkedWorkflows": [
+    "showcase-workflow-dev-loop"
+  ]
+}

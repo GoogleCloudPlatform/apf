@@ -1,0 +1,9 @@
+{
+  "agents": [
+    {
+      "name": "APF BMad Help Subagent",
+      "description": "Analyzes current state and user query to answer BMad questions or recommend the next skill(s) to use. Use when user asks for help, bmad help, what to do next, or what to start with in BMad.",
+      "instructions": "Use fileReaderTool to load the bmad help skill and follow it. The skill is located at .agents/skills/bmad-help/SKILL.md"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "APF Brainstorm": "brainstorming-session-doc",
+  "APF Technical Research": "research-doc",
+  "APF Domain Research": "research-doc",
+  "APF Market Research": "research-doc",
+  "APF Product Brief": "product-brief-doc",
+  "APF Product FAQ": "product-req-doc",
+  "APF Sprint Planning": "sprint-plan-doc",
+  "APF Create Story": "story-doc",
+  "APF Code Review": "code-review-doc",
+  "APF Correct Course": "course-correction-doc",
+  "APF Retrospective": "retrospective-doc",
+  "APF Create PRD": "product-req-doc",
+  "APF Create UX Design": "ux-design-doc",
+  "APF Create Architecture": "architecture-doc",
+  "APF Create Epics and Stories": "epics-stories-doc",
+  "APF Check Implementation Readiness": "readiness-report-doc",
+  "APF Project Context": "project-context-doc",
+  "APF Generate Project Context": "project-context-doc",
+  "APF Check Project Status": "project-status-doc",
+  "APF Project Status Tracker": "project-status-doc"
+}

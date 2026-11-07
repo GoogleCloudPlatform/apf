@@ -1,0 +1,23 @@
+{
+  "tabName": "SOLUTIONING",
+  "quickActionName": "UX Specification",
+  "description": "Conversation fixture for Solutioning phase UX Specification skill flow",
+  "fileNamePattern": ".*ux.*\\.md|.*\\.md",
+  "turns": [
+    {
+      "turnIndex": 1,
+      "agentKeyword": "ui layout",
+      "userReply": "Specify Project Templates tab in Settings dialog and Sample Project badge on Dashboard."
+    },
+    {
+      "turnIndex": 2,
+      "agentKeyword": "navigation rules",
+      "userReply": "Gate pipeline tabs so Onboarding, Planning, and Solutioning are unlocked."
+    },
+    {
+      "turnIndex": 3,
+      "agentKeyword": "proceed",
+      "userReply": "Proceed"
+    }
+  ]
+}

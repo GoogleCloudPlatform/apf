@@ -1,0 +1,10 @@
+[tools]
+go = "1.26.1"
+
+[tasks.run]
+description = "Run the BMad packaging script"
+run = "go run package.go"
+
+[tasks.test]
+description = "Run unit tests for BMad packaging utilities"
+run = "go test -v package.go package_test.go"

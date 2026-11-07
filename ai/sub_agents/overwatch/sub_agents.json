@@ -1,0 +1,19 @@
+{
+  "agents": [
+    {
+      "name": "APF Project Status Tracker",
+      "description": "Tracks overall project status using a deliverable checklist. Use when the user requests to 'check project status', 'run project status tracker', or 'track deliverables'",
+      "instructions": "Use fileReaderTool to load the project status tracker skill and follow it. The skill is located at .agents/skills/project-status-tracker/SKILL.md"
+    },
+    {
+      "name": "APF Generate Project Context",
+      "description": "Set up, refresh, or audit a repository's agent instructions (the AGENTS.md block) so AI agents work well in that repo. Use when the user says \"generate project context\", \"create project context\", or \"document this project\"",
+      "instructions": "Use fileReaderTool to load the project context skill and follow it. The skill is located at .agents/skills/bmad-project-context/SKILL.md"
+    },
+    {
+      "name": "APF BMad Help Subagent",
+      "description": "Analyzes current state and user query to answer BMad questions or recommend the next skill(s) to use. Use when user asks for help, bmad help, what to do next, or what to start with in BMad.",
+      "instructions": "Use fileReaderTool to load the bmad help skill and follow it. The skill is located at .agents/skills/bmad-help/SKILL.md"
+    }
+  ]
+}

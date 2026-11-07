@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<!--
+ Copyright 2026 Google LLC
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APF Design Directions</title>
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #e2e8f0; margin: 0; padding: 2rem; color: #334155; }
+        h1 { text-align: center; margin-bottom: 2rem; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 2rem; }
+        .card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); }
+        .card-header { padding: 1rem; border-bottom: 1px solid #f1f5f9; background: #f8fafc; }
+        .card-header h2 { margin: 0; font-size: 1.25rem; color: #0f172a; }
+        .card-content { padding: 1rem; height: 300px; display: flex; flex-direction: column; background: #f1f5f9; position: relative; }
+        
+        /* Direction 1: Split-Pane */
+        .d1 { display: flex; height: 100%; border-radius: 8px; overflow: hidden; border: 1px solid #cbd5e1; }
+        .d1-left { width: 30%; background: #ffffff; border-right: 1px solid #e2e8f0; padding: 10px; font-size: 0.8rem; }
+        .d1-right { width: 70%; background: #f8fafc; padding: 10px; display:flex; align-items:center; justify-content:center;}
+        
+        /* Direction 2: Immersive Canvas */
+        .d2 { height: 100%; border-radius: 8px; overflow: hidden; border: 1px solid #cbd5e1; background: #f0fdf4; position: relative; }
+        .d2-float { position: absolute; left: 10px; top: 10px; bottom: 10px; width: 60px; background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .d2-chat { position: absolute; right: 10px; bottom: 10px; width: 250px; height: 150px; background: white; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        
+        /* Direction 3: IDE Sidebar */
+        .d3 { display: flex; height: 100%; border-radius: 8px; overflow: hidden; border: 1px solid #cbd5e1; background: white; }
+        .d3-act { width: 40px; background: #0f172a; }
+        .d3-side { width: 150px; background: #f8fafc; border-right: 1px solid #e2e8f0; }
+        .d3-main { flex: 1; background: #ffffff; }
+        
+        /* Direction 4: Stacked Notion style */
+        .d4 { height: 100%; border-radius: 8px; overflow: hidden; border: 1px solid #cbd5e1; background: white; padding: 20px; display:flex; flex-direction:column; gap: 10px; align-items:center; }
+        .d4-chat { width: 80%; padding: 15px; background: #f8fafc; border-radius: 8px; border: 1px dashed #cbd5e1; text-align:center; color: #64748b;}
+        .d4-doc { width: 80%; flex: 1; background: #fdfdfd; border-radius: 8px; border: 1px solid #e2e8f0; }
+
+        .btn { display: inline-block; background: #2563eb; color: white; padding: 0.5rem 1rem; border-radius: 6px; text-decoration: none; margin-top: 10px; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+    <h1>Design Direction Mockups</h1>
+    <div class="grid">
+        <!-- Direction 1 -->
+        <div class="card">
+            <div class="card-header">
+                <h2>1. Split-Pane Minimalist (Apple-like)</h2>
+                <p style="margin: 5px 0 0; font-size: 0.9rem; color: #64748b;">Clean 30/70 vertical split. High focus on workspace.</p>
+            </div>
+            <div class="card-content">
+                <div class="d1">
+                    <div class="d1-left">Chat & Pipeline Status</div>
+                    <div class="d1-right">Live Artifact / Node Canvas</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Direction 2 -->
+        <div class="card">
+            <div class="card-header">
+                <h2>2. Immersive Canvas (Figma-style)</h2>
+                <p style="margin: 5px 0 0; font-size: 0.9rem; color: #64748b;">Full-bleed canvas with floating translucent chat and tools.</p>
+            </div>
+            <div class="card-content">
+                <div class="d2">
+                    <div class="d2-float"></div>
+                    <div class="d2-chat"><div style="padding:10px; font-size: 0.8rem;">Floating Chat</div></div>
+                    <div style="position:absolute; top:40%; left:30%;">Infinite Workspace Area</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Direction 3 -->
+        <div class="card">
+            <div class="card-header">
+                <h2>3. Contextual Sidebar (IDE Standard)</h2>
+                <p style="margin: 5px 0 0; font-size: 0.9rem; color: #64748b;">Familiar to devs. Thin activity bar + chat sidebar + main doc.</p>
+            </div>
+            <div class="card-content">
+                <div class="d3">
+                    <div class="d3-act"></div>
+                    <div class="d3-side"><div style="padding:10px; font-size: 0.8rem;">Sidebar Chat</div></div>
+                    <div class="d3-main"><div style="padding:10px; display:flex; align-items:center; justify-content:center; height:100%;">Document View</div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Direction 4 -->
+        <div class="card">
+            <div class="card-header">
+                <h2>4. Stacked Document (Notion-style)</h2>
+                <p style="margin: 5px 0 0; font-size: 0.9rem; color: #64748b;">Top-down flow. Chat acts as an inline command block above the doc.</p>
+            </div>
+            <div class="card-content">
+                <div class="d4">
+                    <div class="d4-chat">Inline AI Chat Block</div>
+                    <div class="d4-doc"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

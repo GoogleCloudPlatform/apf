@@ -1,0 +1,23 @@
+{
+  "tabName": "IMPLEMENTATION",
+  "quickActionName": "Build",
+  "description": "Conversation fixture for Implementation phase Build skill flow",
+  "fileNamePattern": ".*",
+  "turns": [
+    {
+      "turnIndex": 1,
+      "agentKeyword": "implementation task",
+      "userReply": "Implement the showcase seeder API handler in Go and Settings modal in Next.js."
+    },
+    {
+      "turnIndex": 2,
+      "agentKeyword": "verification",
+      "userReply": "Run automated unit tests and verify reset endpoint returns 200 OK."
+    },
+    {
+      "turnIndex": 3,
+      "agentKeyword": "continue",
+      "userReply": "Continue"
+    }
+  ]
+}

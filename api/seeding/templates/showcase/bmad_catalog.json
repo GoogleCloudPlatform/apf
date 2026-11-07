@@ -1,0 +1,1637 @@
+[
+  {
+    "name": "bmad-advanced-elicitation",
+    "description": "Pushes the LLM to reconsider, refine, and improve recent output using deeper critique methods (Socratic interrogation, First Principles decomposition, Pre-Mortem stress-testing, Red Team challenge).",
+    "phase": "Other",
+    "isDeprecated": false,
+    "apf_supported": true,
+    "requires_sandbox": false,
+    "invokes": [],
+    "invokedBy": [
+      "bmad-agent-analyst",
+      "bmad-agent-architect",
+      "bmad-agent-pm",
+      "bmad-architecture",
+      "bmad-brainstorming",
+      "bmad-forge-idea",
+      "bmad-prd",
+      "bmad-product-brief",
+      "bmad-review"
+    ],
+    "artifactsGenerated": [
+      "docs/critique-summary.md",
+      "Refined analysis sections in active documents"
+    ],
+    "artifactsConsumed": [
+      "docs/prd.md [produced by bmad-prd]",
+      "docs/architecture.md [produced by bmad-architecture]",
+      "docs/brief.md [produced by bmad-product-brief]",
+      "docs/specs/.spec.md [produced by bmad-spec]",
+      "Draft source code / Git diffs [produced by bmad-build / User]"
+    ]
+  },
+  {
+    "name": "bmad-agent-analyst",
+    "description": "Strategic business analyst persona (Mary) expert in requirements discovery, domain research, competitive analysis, and business modeling.",
+    "phase": "Analysis",
+    "isDeprecated": false,
+    "apf_supported": true,
+    "requires_sandbox": false,
+    "invokes": [
+      "bmad-brainstorming",
+      "bmad-deep-recon",
+      "bmad-domain-research",
+      "bmad-forge-idea",
+      "bmad-market-research",
+      "bmad-prd",
+      "bmad-product-brief"
+    ],
+    "invokedBy": [
+      "bmad-help",
+      "bmad-party-mode"
+    ],
+    "artifactsGenerated": [
+      "docs/brief.md",
+      "docs/prd.md",
+      "docs/recon/domain-research.md"
+    ],
+    "artifactsConsumed": [
+      "User Problem Statements & Requirements [provided by User]",
+      "docs/recon/-research.md [produced by bmad-deep-recon]",
+      "docs/brainstorming-ideas.md [produced by bmad-brainstorming]",
+      "docs/forged-idea.md [produced by bmad-forge-idea]"
+    ]
+  },
+  {
+    "name": "bmad-agent-architect",
+    "description": "System architect and technical design leader persona (Winston) focusing on system invariants, data schemas, API boundaries, non-functional requirements, and architectural spikes.",
+    "phase": "Solution",
+    "isDeprecated": false,
+    "apf_supported": true,
+    "requires_sandbox": false,
+    "invokes": [
+      "bmad-architecture",
+      "bmad-deep-recon",
+      "bmad-review",
+      "bmad-technical-research",
+      "bmad-testarch-test-design"
+    ],
+    "invokedBy": [
+      "bmad-help",
+      "bmad-party-mode"
+    ],
+    "artifactsGenerated": [
+      "docs/architecture.md",
+      "docs/adr/*.md"
+    ],
+    "artifactsConsumed": [
+      "docs/prd.md [produced by bmad-prd]",
+      "docs/brief.md [produced by bmad-product-brief]",
+      "docs/recon/technical-research.md [produced by bmad-deep-recon]",
+      "Codebase Architecture & Constraints [produced by User / bmad-build]"
+    ]
+  },
+  {
+    "name": "bmad-agent-builder",
+    "description": "Builds, edits, or analyzes Agent Skills and agent personas through conversational discovery and schema generation.",
+    "phase": "Other",
+    "isDeprecated": false,
+    "apf_supported": false,
+    "requires_sandbox": false,
+    "invokes": [
+      "bmad-eval-runner",
+      "bmad-module-builder",
+      "bmad-workflow-builder"
+    ],
+    "invokedBy": [
+      "bmad-help"
+    ],
+    "artifactsGenerated": [
+      ".agents/skills//SKILL.md",
+      "Agent definition YAML files"
+    ],
+    "artifactsConsumed": [
+      "Agent/Skill Specifications [provided by User]",
+      ".bmad/workflows/.yaml [produced by bmad-workflow-builder]",
+      "eval-results/-eval.json [produced by bmad-eval-runner]"
+    ]
+  },
+  {
+    "name": "bmad-agent-dev",
+    "description": "Senior software engineer persona (Amelia) responsible for story execution, TDD implementation, clean code refactoring, and bug fixes.",
+    "phase": "Implementation",
+    "isDeprecated": false,
+    "apf_supported": true,
+    "requires_sandbox": true,
+    "invokes": [
+      "bmad-build",
+      "bmad-checkpoint-preview",
+      "bmad-code-review",
+      "bmad-testarch-atdd",
+      "bmad-testarch-automate"
+    ],
+    "invokedBy": [
+      "bmad-help",
+      "bmad-party-mode"
+    ],
+    "artifactsGenerated": [
+      "Application source code files",
+      "Test files (tests/**/.test.ts, tests/test_.py)",
+      "docs/sprint-status.yaml"
+    ],
+    "artifactsConsumed": [
+      "docs/sprint-status.yaml [produced by bmad-sprint-planning]",
+      "docs/stories/.md [produced by bmad-create-epics-and-stories]",
+      "docs/architecture.md [produced by bmad-architecture]",
+      "docs/prd.md [produced by bmad-prd]"
+    ]
+  },
+  {
+    "name": "bmad-agent-pm",
+    "description": "Product manager persona (John) for PRD creation, requirements discovery, PRFAQs, customer journeys, and feature prioritization.",
+    "phase": "Plan",
+    "isDeprecated": false,
+    "apf_supported": true,
+    "requires_sandbox": false,
+    "invokes": [
+      "bmad-brainstorming",
+      "bmad-create-epics-and-stories",
+      "bmad-prd",
+      "bmad-prfaq",
+      "bmad-product-brief"
+    ],
+    "invokedBy": [
+      "bmad-help",
+      "bmad-party-mode"
+    ],
+    "artifactsGenerated": [
+      "docs/prd.md",
+      "docs/brief.md",
+      "docs/prfaq.md",
+      "docs/epics-and-stories.md"
+    ],
+    "artifactsConsumed": [
+      "User Problem Statements & Business Goals [provided by User]",
+      "docs/brief.md [produced by bmad-product-brief]",
+      "docs/recon/-research.md [produced by bmad-deep-recon]"
+    ]
+  },
+  {
+    "name": "bmad-agent-ux-designer",
+    "description": "UX designer and UI specialist persona (Sally) responsible for wireframes, interaction workflows, design systems, and usability guidelines.",
+    "phase": "Planning",
+    "isDeprecated": false,
+    "apf_supported": true,
+    "requires_sandbox": false,
+    "invokes": [
+      "bmad-brainstorming",
+      "bmad-review",
+      "bmad-ux"
+    ],
+    "invokedBy": [
+      "bmad-help",
+      "bmad-party-mode"
+    ],
+    "artifactsGenerated": [
+      "docs/ux-design.md",
+      "UI layout specifications",
+      "Interaction flowcharts"
+    ],
+    "artifactsConsumed": [
+      "docs/prd.md [produced by bmad-prd]",
+      "docs/brief.md [produced by bmad-product-brief]",
+      "User Personas & Journey Maps [provided by User / bmad-agent-pm]"
+    ]
+  },
+  {
+    "name": "bmad-architecture",
+    "description": "Produces the system architecture spine of invariants, data models, API boundaries, and technical decisions that guide development.",
+    "phase": "Solution",
+    "isDeprecated": false,
+    "apf_supported": true,
+    "requires_sandbox": false,
+    "invokes": [
+      "bmad-deep-recon",
+      "bmad-review"
+    ],
+    "invokedBy": [
+      "bmad-agent-architect",
+      "bmad-create-architecture",
+      "bmad-help"
+    ],
+    "artifactsGenerated": [
+      "docs/architecture.md",
+      "System design diagrams"
+    ],
+    "artifactsConsumed": [
+      "docs/prd.md [produced by bmad-prd]",
+      "docs/brief.md [produced by bmad-product-brief]",
+      "docs/recon/technical-research.md [produced by bmad-deep-recon]",
+      "Existing Codebase Patterns & Tech Stack [produced by User / bmad-build]"
+    ]
+  },
+  {
+    "name": "bmad-bmb-setup",
+    "description": "Sets up and configures the BMad Builder module and local development environment settings in a project.",
+    "phase": "Other",
+    "isDeprecated": false,
+    "apf_supported": false,
+    "requires_sandbox": false,
+    "invokes": [],
+    "invokedBy": [
+      "bmad-help"
+    ],
+    "artifactsGenerated": [
+      ".bmad/config.yaml",
+      "BMad Builder module manifests"
+    ],
+    "artifactsConsumed": [
+      "Project Root Configuration & Directory Layout [provided by User]"
+    ]
+  },
+  {
+    "name": "bmad-brainstorming",
+    "description": "Facilitates creative brainstorming sessions using diverse ideation techniques to explore innovative product concepts.",
+    "phase": "Analysis",
+    "isDeprecated": false,
+    "apf_supported": true,
+    "requires_sandbox": false,
+    "invokes": [
+      "bmad-advanced-elicitation",
+      "bmad-forge-idea"
+    ],
+    "invokedBy": [
+      "bmad-agent-analyst",
+      "bmad-agent-pm",
+      "bmad-agent-ux-designer",
+      "bmad-help",
+      "bmad-product-brief"
+    ],
+    "artifactsGenerated": [
+      "docs/brainstorming-ideas.md",
+      "Opportunity maps"
+    ],
+    "artifactsConsumed": [
+      "Problem Space Prompts & Feature Seeds [provided by User]",
+      "docs/brief.md [produced by bmad-product-brief]"
+    ]
+  },
+  {
+    "name": "bmad-build",
+    "description": "Implements any user intent, story, bug fix, or feature request by writing clean, working code conforming to project patterns.",
+    "phase": "Implementation",
+    "isDeprecated": false,
+    "apf_supported": true,
+    "requires_sandbox": true,
+    "invokes": [
+      "bmad-checkpoint-preview",
+      "bmad-code-review",
+      "bmad-testarch-atdd"
+    ],
+    "invokedBy": [
+      "bmad-agent-dev",
+      "bmad-build-auto",
+      "bmad-create-story",
+      "bmad-dev-story",
+      "bmad-help",
+      "bmad-loop-resolve",
+      "bmad-quick-dev"
+    ],
+    "artifactsGenerated": [
+      "Application source code files",
+      "Test files",
+      "docs/sprint-status.yaml"
+    ],
+    "artifactsConsumed": [
+      "docs/stories/.md [produced by bmad-create-epics-and-stories]",
+      "docs/architecture.md [produced by bmad-architecture]",
+      "docs/sprint-status.yaml [produced by bmad-sprint-planning]",
+      "docs/prd.md [produced by bmad-prd]",
+      "Codebase Source Files [produced by User / bmad-build]"
+    ]
+  },
+  {
+    "name": "bmad-build-auto",
+    "description": "Executes one autonomous iteration of an unattended development loop, picking the next pending story and driving it to completion.",
+    "phase": "Implementation",
+    "isDeprecated": false,
+    "apf_supported": true,
+    "requires_sandbox": true,
+    "invokes": [
+      "bmad-build",
+      "bmad-code-review",
+      "bmad-sprint-planning"
+    ],
+    "invokedBy": [
+      "bmad-dev-auto",
+      "bmad-help"
+    ],
+    "artifactsGenerated": [
+      "Implementation source code files",
+      "Test files",
+      "docs/sprint-status.yaml"
+    ],
+    "artifactsConsumed": [
+      "docs/sprint-status.yaml [produced by bmad-sprint-planning]",
+      "docs/stories/.md [produced by bmad-create-epics-and-stories]",
+      "docs/architecture.md [produced by bmad-architecture]",
+      "Codebase Source Files [produced by User / bmad-build]"
+    ]
+  },
+  {
+    "name": "bmad-checkpoint-preview",
+    "description": "Facilitates human-in-the-loop review by walking through changes, explaining key decisions, highlighting risk areas, and testing.",
+    "phase": "Implementation",
+    "isDeprecated": false,
+    "apf_supported": true,
+    "requires_sandbox": true,
+    "invokes": [],
+    "invokedBy": [
+      "bmad-agent-dev",
+      "bmad-build",
+      "bmad-build-auto",
+      "bmad-help"
+    ],
+    "artifactsGenerated": [
+      "Review notes",
+      "Walkthrough summary",
+      "Testing instructions"
+    ],
+    "artifactsConsumed": [
+      "Git Working Directory Diff [produced by bmad-build / User]",
+      "docs/stories/.md [produced by bmad-create-epics-and-stories]",
+      "Modified Source Code Files [produced by bmad-build]"
+    ]
+  },
+  {
+    "name": "bmad-code-review",
+    "description": "Adversarial code review using parallel review layers (logic, security, performance, style) and structured issue triage.",
+    "phase": "Implementation",
+    "isDeprecated": false,
+    "apf_supported": true,
+    "requires_sandbox": true,
+    "invokes": [
+      "bmad-review"
+    ],
+    "invokedBy": [
+      "bmad-agent-dev",
+      "bmad-build",
+      "bmad-build-auto",
+      "bmad-help"
+    ],
+    "artifactsGenerated": [
+      "docs/code-reviews/-review.md",
+      "Triage issue lists",
+      "Proposed fix diffs"
+    ],
+    "artifactsConsumed": [
+      "Git Diff / Source Code Files [produced by bmad-build]",
+      "docs/architecture.md [produced by bmad-architecture]",
+      "docs/stories/.md [produced by bmad-create-epics-and-stories]"
+    ]
+  },
+  {
+    "name": "bmad-correct-course",
+    "description": "Manages significant changes during sprint execution, realigning story scope and updating sprint tracking.",
+    "phase": "Implementation",
+    "isDeprecated": false,
+    "apf_supported": true,
+    "requires_sandbox": false,
+    "invokes": [
+      "bmad-create-epics-and-stories",
+      "bmad-sprint-planning"
+    ],
+    "invokedBy": [
+      "bmad-help",
+      "bmad-sprint-planning"
+    ],
+    "artifactsGenerated": [
+      "docs/sprint-status.yaml",
+      "docs/stories/.md"
+    ],
+    "artifactsConsumed": [
+      "docs/sprint-status.yaml [produced by bmad-sprint-planning]",
+      "docs/epics-and-stories.md [produced by bmad-create-epics-and-stories]",
+      "Course Correction Change Requests [provided by User]"
+    ]
+  },
+  {
+    "name": "bmad-create-architecture",
+    "description": "Deprecated forwarder skill that forwards to bmad-architecture to produce technical system architectures.",
+    "phase": "Solution",
+    "isDeprecated": true,
+    "apf_supported": true,
+    "requires_sandbox": false,
+    "invokes": [
+      "bmad-architecture"
+    ],
+    "invokedBy": [
+      "bmad-help"
+    ],
+    "artifactsGenerated": [
+      "docs/architecture.md"
+    ],
+    "artifactsConsumed": [
+      "docs/prd.md [produced by bmad-prd]",
+      "docs/brief.md [produced by bmad-product-brief]"
+    ]
+  },
+  {
+    "name": "bmad-create-epics-and-stories",
+    "description": "Breaks product requirements and architecture into epics and actionable user stories with explicit acceptance criteria.",
+    "phase": "Solutioning",
+    "isDeprecated": false,
+    "apf_supported": true,
+    "requires_sandbox": false,
+    "invokes": [
+      "bmad-review",
+      "bmad-spec"
+    ],
+    "invokedBy": [
+      "bmad-agent-pm",
+      "bmad-correct-course",
+      "bmad-help",
+      "bmad-sprint-planning"
+    ],
+    "artifactsGenerated": [
+      "docs/epics-and-stories.md",
+      "docs/stories/.md"
+    ],
+    "artifactsConsumed": [
+      "docs/prd.md [produced by bmad-prd]",
+      "docs/architecture.md [produced by bmad-architecture]",
+      "docs/brief.md [produced by bmad-product-brief]"
+    ]
+  },
+  {
+    "name": "bmad-create-prd",
+    "description": "Deprecated forwarder skill that forwards to bmad-prd (create intent) to build a Product Requirements Document.",
+    "phase": "Plan",
+    "isDeprecated": true,
+    "apf_supported": true,
+    "requires_sandbox": false,
+    "invokes": [
+      "bmad-prd"
+    ],
+    "invokedBy": [
+      "bmad-help"
+    ],
+    "artifactsGenerated": [
+      "docs/prd.md"
+    ],
+    "artifactsConsumed": [
+      "docs/brief.md [produced by bmad-product-brief]",
+      "User Requirements [provided by User]"
+    ]
+  },
+  {
+    "name": "bmad-create-story",
+    "description": "Deprecated forwarder skill that forwards to bmad-build for executing user story implementation.",
+    "phase": "Implementation",
+    "isDeprecated": true,
+    "apf_supported": true,
+    "requires_sandbox": false,
+    "invokes": [
+      "bmad-build"
+    ],
+    "invokedBy": [
+      "bmad-help"
+    ],
+    "artifactsGenerated": [
+      "Application source code",
+      "Test files"
+    ],
+    "artifactsConsumed": [
+      "docs/stories/.md [produced by bmad-create-epics-and-stories]",
+      "docs/architecture.md [produced by bmad-architecture]"
+    ]
+  },
+  {
+    "name": "bmad-customize",
+    "description": "Authors and updates customization overrides for installed BMad skills, modifying agent behaviors and workflow steps.",
+    "phase": "Other",
+    "isDeprecated": false,
+    "apf_supported": false,
+    "requires_sandbox": false,
+    "invokes": [],
+    "invokedBy": [
+      "bmad-help"
+    ],
+    "artifactsGenerated": [
+      ".bmad/customizations/.yaml",
+      "Prompt override templates"
+    ],
+    "artifactsConsumed": [
+      "Installed Skill Manifests [produced by bmad-agent-builder / User]",
+      "Custom User Preferences [provided by User]"
+    ]
+  },
+  {
+    "name": "bmad-deep-recon",
+    "description": "Decision-grade research across market, domain, technical, competitive, user-voice, and academic literature.",
+    "phase": "Analysis",
+    "isDeprecated": false,
+    "apf_supported": true,
+    "requires_sandbox": false,
+    "invokes": [],
+    "invokedBy": [
+      "bmad-agent-analyst",
+      "bmad-agent-architect",
+      "bmad-architecture",
+      "bmad-domain-research",
+      "bmad-forge-idea",
+      "bmad-help",
+      "bmad-market-research",
+      "bmad-prd",
+      "bmad-technical-research"
+    ],
+    "artifactsGenerated": [
+      "docs/recon/-research.md",
+      "Comparison matrices",
+      "Cited distillation summaries"
+    ],
+    "artifactsConsumed": [
+      "Research Queries & Topics [provided by User / Upstream skills]",
+      "External Web Data & Benchmarks [retrieved via Search]"
+    ]
+  },
+  {
+    "name": "bmad-dev-auto",
+    "description": "Deprecated forwarder skill that forwards to bmad-build-auto for automated dev loop execution.",
+    "phase": "Implementation",
+    "isDeprecated": true,
+    "apf_supported": true,
+    "requires_sandbox": false,
+    "invokes": [
+      "bmad-build-auto"
+    ],
+    "invokedBy": [
+      "bmad-help"
+    ],
+    "artifactsGenerated": [
+      "Source code",
+      "Test files",
+      "docs/sprint-status.yaml"
+    ],
+    "artifactsConsumed": [
+      "docs/sprint-status.yaml [produced by bmad-sprint-planning]",
+      "docs/stories/.md [produced by bmad-create-epics-and-stories]"
+    ]
+  },
+  {
+    "name": "bmad-dev-story",
+    "description": "Deprecated forwarder skill that forwards to bmad-build for user story implementation.",
+    "phase": "Implementation",
+    "isDeprecated": true,
+    "apf_supported": true,
+    "requires_sandbox": false,
+    "invokes": [
+      "bmad-build"
+    ],
+    "invokedBy": [
+      "bmad-help"
+    ],
+    "artifactsGenerated": [
+      "Source code",
+      "Test files"
+    ],
+    "artifactsConsumed": [
+      "docs/stories/.md [produced by bmad-create-epics-and-stories]",
+      "docs/architecture.md [produced by bmad-architecture]"
+    ]
+  },
+  {
+    "name": "bmad-document-project",
+    "description": "Deprecated forwarder skill that forwards to bmad-project-context to generate repository documentation.",
+    "phase": "Other",
+    "isDeprecated": true,
+    "apf_supported": true,
+    "requires_sandbox": false,
+    "invokes": [
+      "bmad-project-context"
+    ],
+    "invokedBy": [
+      "bmad-help"
+    ],
+    "artifactsGenerated": [
+      "AGENTS.md",
+      "README.md"
+    ],
+    "artifactsConsumed": [
+      "Codebase Source Files [produced by User / bmad-build]",
+      "Build Configurations [provided by User]"
+    ]
+  },
+  {
+    "name": "bmad-domain-research",
+    "description": "Deprecated forwarder skill that forwards to bmad-deep-recon (domain research type).",
+    "phase": "Analysis",
+    "isDeprecated": true,
+    "apf_supported": true,
+    "requires_sandbox": false,
+    "invokes": [
+      "bmad-deep-recon"
+    ],
+    "invokedBy": [
+      "bmad-agent-analyst",
+      "bmad-help"
+    ],
+    "artifactsGenerated": [
+      "docs/recon/domain-research.md"
+    ],
+    "artifactsConsumed": [
+      "Domain Topics & Business Rules [provided by User / bmad-agent-analyst]"
+    ]
+  },
+  {
+    "name": "bmad-edit-prd",
+    "description": "Deprecated forwarder skill that forwards to bmad-prd (update intent) to edit an existing PRD.",
+    "phase": "Plan",
+    "isDeprecated": true,
+    "apf_supported": true,
+    "requires_sandbox": false,
+    "invokes": [
+      "bmad-prd"
+    ],
+    "invokedBy": [
+      "bmad-help"
+    ],
+    "artifactsGenerated": [
+      "docs/prd.md"
+    ],
+    "artifactsConsumed": [
+      "docs/prd.md [produced by bmad-prd]",
+      "Edit Change Requests [provided by User]"
+    ]
+  },
+  {
+    "name": "bmad-editorial-review",
+    "description": "Deprecated forwarder skill that forwards to bmad-review for editorial reviews of markdown artifacts.",
+    "phase": "Other",
+    "isDeprecated": true,
+    "apf_supported": true,
+    "requires_sandbox": false,
+    "invokes": [
+      "bmad-review"
+    ],
+    "invokedBy": [
+      "bmad-help"
+    ],
+    "artifactsGenerated": [
+      "Editorial review reports"
+    ],
+    "artifactsConsumed": [
+      "docs/prd.md [produced by bmad-prd]",
+      "docs/architecture.md [produced by bmad-architecture]",
+      "docs/brief.md [produced by bmad-product-brief]"
+    ]
+  },
+  {
+    "name": "bmad-editorial-review-prose",
+    "description": "Deprecated forwarder skill that forwards to bmad-review (prose review lens).",
+    "phase": "Other",
+    "isDeprecated": true,
+    "apf_supported": true,
+    "requires_sandbox": false,
+    "invokes": [
+      "bmad-review"
+    ],
+    "invokedBy": [
+      "bmad-help"
+    ],
+    "artifactsGenerated": [
+      "Prose review feedback reports"
+    ],
+    "artifactsConsumed": [
+      "docs/prd.md [produced by bmad-prd]",
+      "docs/brief.md [produced by bmad-product-brief]",
+      "Markdown documentation [produced by User / BMad skills]"
+    ]
+  },
+  {
+    "name": "bmad-editorial-review-structure",
+    "description": "Deprecated forwarder skill that forwards to bmad-review (structure review lens).",
+    "phase": "Other",
+    "isDeprecated": true,
+    "apf_supported": true,
+    "requires_sandbox": false,
+    "invokes": [
+      "bmad-review"
+    ],
+    "invokedBy": [
+      "bmad-help"
+    ],
+    "artifactsGenerated": [
+      "Document structure feedback reports"
+    ],
+    "artifactsConsumed": [
+      "docs/prd.md [produced by bmad-prd]",
+      "docs/architecture.md [produced by bmad-architecture]",
+      "docs/specs/.spec.md [produced by bmad-spec]"
+    ]
+  },
+  {
+    "name": "bmad-eval-runner",
+    "description": "Runs a skill's evals, validates trigger accuracy, benchmarks performance, and grades output quality against evaluation sets.",
+    "phase": "Other",
+    "isDeprecated": false,
+    "apf_supported": true,
+    "requires_sandbox": true,
+    "invokes": [],
+    "invokedBy": [
+      "bmad-agent-builder",
+      "bmad-help",
+      "bmad-module-builder",
+      "bmad-workflow-builder"
+    ],
+    "artifactsGenerated": [
+      "eval-results/-eval.json",
+      "Evaluation scorecards"
+    ],
+    "artifactsConsumed": [
+      ".agents/skills//SKILL.md [produced by bmad-agent-builder]",
+      "Evaluation Test Cases & Grading Rubrics [provided by User]"
+    ]
+  },
+  {
+    "name": "bmad-forge-idea",
+    "description": "Pressure-tests an idea through persona-driven interrogation until it hardens, proves out, or dies cheaply.",
+    "phase": "Analysis",
+    "isDeprecated": false,
+    "apf_supported": true,
+    "requires_sandbox": false,
+    "invokes": [
+      "bmad-advanced-elicitation",
+      "bmad-deep-recon"
+    ],
+    "invokedBy": [
+      "bmad-agent-analyst",
+      "bmad-brainstorming",
+      "bmad-help",
+      "bmad-product-brief"
+    ],
+    "artifactsGenerated": [
+      "docs/forged-idea.md",
+      "Risk analysis logs"
+    ],
+    "artifactsConsumed": [
+      "Raw Idea Pitches [provided by User]",
+      "docs/brainstorming-ideas.md [produced by bmad-brainstorming]"
+    ]
+  },
+  {
+    "name": "bmad-generate-project-context",
+    "description": "Deprecated forwarder skill that forwards to bmad-project-context to generate repository agent context.",
+    "phase": "Other",
+    "isDeprecated": true,
+    "apf_supported": true,
+    "requires_sandbox": false,
+    "invokes": [
+      "bmad-project-context"
+    ],
+    "invokedBy": [
+      "bmad-help"
+    ],
+    "artifactsGenerated": [
+      "AGENTS.md"
+    ],
+    "artifactsConsumed": [
+      "Repository File Tree [provided by User]",
+      "Build & Test Configurations [provided by User]"
+    ]
+  },
+  {
+    "name": "bmad-help",
+    "description": "Analyzes current repository state and user query to answer BMad questions and recommend the next skill to invoke.",
+    "phase": "Other",
+    "isDeprecated": false,
+    "apf_supported": true,
+    "requires_sandbox": false,
+    "invokes": [
+      "bmad-architecture",
+      "bmad-build",
+      "bmad-create-epics-and-stories",
+      "bmad-party-mode",
+      "bmad-prd",
+      "bmad-sprint-planning"
+    ],
+    "invokedBy": [],
+    "artifactsGenerated": [
+      "Workflow recommendations",
+      "Next-step action plans"
+    ],
+    "artifactsConsumed": [
+      ".bmad/config.yaml [produced by bmad-bmb-setup]",
+      "docs/ directory artifacts [produced by various BMad skills]",
+      "User Inquiries [provided by User]"
+    ]
+  },
+  {
+    "name": "bmad-loop-resolve",
+    "description": "Interactive escalation-resolution workflow for the bmad-loop orchestrator to resolve blocked stories and contradictions with the human.",
+    "phase": "Other",
+    "isDeprecated": false,
+    "apf_supported": true,
+    "requires_sandbox": true,
+    "invokes": [
+      "bmad-build",
+      "bmad-spec"
+    ],
+    "invokedBy": [
+      "bmad-help"
+    ],
+    "artifactsGenerated": [
+      "docs/stories/.md",
+      "Escalation resolution records"
+    ],
+    "artifactsConsumed": [
+      "Escalation Dump [produced by bmad-loop runner]",
+      "docs/stories/.md [produced by bmad-create-epics-and-stories]",
+      "Codebase Context [produced by User / bmad-build]"
+    ]
+  },
+  {
+    "name": "bmad-loop-setup",
+    "description": "Sets up and configures the BMAD Loop Skills module and loop execution environment in a project.",
+    "phase": "Other",
+    "isDeprecated": false,
+    "apf_supported": true,
+    "requires_sandbox": true,
+    "invokes": [],
+    "invokedBy": [
+      "bmad-help"
+    ],
+    "artifactsGenerated": [
+      ".bmad/loop-config.yaml",
+      "Loop runner scripts"
+    ],
+    "artifactsConsumed": [
+      "Project Configuration Settings [provided by User]"
+    ]
+  },
+  {
+    "name": "bmad-loop-sweep",
+    "description": "Triages the deferred-work ledger for the bmad-loop orchestrator, verifying open entries against code and creating execution bundles.",
+    "phase": "Other",
+    "isDeprecated": false,
+    "apf_supported": true,
+    "requires_sandbox": true,
+    "invokes": [],
+    "invokedBy": [
+      "bmad-help"
+    ],
+    "artifactsGenerated": [
+      ".bmad/deferred-work.yaml",
+      "Sweep partition reports"
+    ],
+    "artifactsConsumed": [
+      ".bmad/deferred-work.yaml [produced by bmad-loop-sweep / bmad-loop runner]",
+      "Repository Source Files [produced by User / bmad-build]",
+      "Git History [provided by VCS]"
+    ]
+  },
+  {
+    "name": "bmad-market-research",
+    "description": "Deprecated forwarder skill that forwards to bmad-deep-recon (market research type).",
+    "phase": "Analysis",
+    "isDeprecated": true,
+    "apf_supported": true,
+    "requires_sandbox": false,
+    "invokes": [
+      "bmad-deep-recon"
+    ],
+    "invokedBy": [
+      "bmad-agent-analyst",
+      "bmad-help"
+    ],
+    "artifactsGenerated": [
+      "docs/recon/market-research.md"
+    ],
+    "artifactsConsumed": [
+      "Market Research Queries [provided by User / bmad-agent-analyst]"
+    ]
+  },
+  {
+    "name": "bmad-module-builder",
+    "description": "Plans, creates, bundles, and validates BMad modules containing skills, workflows, and configurations.",
+    "phase": "Other",
+    "isDeprecated": false,
+    "apf_supported": false,
+    "requires_sandbox": false,
+    "invokes": [
+      "bmad-eval-runner",
+      "bmad-workflow-builder"
+    ],
+    "invokedBy": [
+      "bmad-agent-builder",
+      "bmad-help"
+    ],
+    "artifactsGenerated": [
+      "modules//module.yaml",
+      "Module skill assets"
+    ],
+    "artifactsConsumed": [
+      "Module Specification Requirements [provided by User]",
+      ".agents/skills//SKILL.md [produced by bmad-agent-builder]",
+      ".bmad/workflows/.yaml [produced by bmad-workflow-builder]"
+    ]
+  },
+  {
+    "name": "bmad-party-mode",
+    "description": "Orchestrates multi-agent discussions, roundtables, and AI focus groups across all BMAD persona roles.",
+    "phase": "Other",
+    "isDeprecated": false,
+    "apf_supported": true,
+    "requires_sandbox": false,
+    "invokes": [
+      "bmad-agent-analyst",
+      "bmad-agent-architect",
+      "bmad-agent-dev",
+      "bmad-agent-pm",
+      "bmad-agent-ux-designer",
+      "bmad-tea"
+    ],
+    "invokedBy": [
+      "bmad-help"
+    ],
+    "artifactsGenerated": [
+      "docs/roundtables/-roundtable.md",
+      "Consensus synthesis reports"
+    ],
+    "artifactsConsumed": [
+      "User Topic / Dilemma [provided by User]",
+      "docs/prd.md [produced by bmad-prd]",
+      "docs/architecture.md [produced by bmad-architecture]"
+    ]
+  },
+  {
+    "name": "bmad-prd",
+    "description": "Creates, updates, or validates a comprehensive Product Requirements Document (PRD).",
+    "phase": "Plan",
+    "isDeprecated": false,
+    "apf_supported": true,
+    "requires_sandbox": false,
+    "invokes": [
+      "bmad-advanced-elicitation",
+      "bmad-deep-recon",
+      "bmad-review"
+    ],
+    "invokedBy": [
+      "bmad-agent-analyst",
+      "bmad-agent-pm",
+      "bmad-create-prd",
+      "bmad-edit-prd",
+      "bmad-help",
+      "bmad-validate-prd"
+    ],
+    "artifactsGenerated": [
+      "docs/prd.md",
+      "PRD validation reports"
+    ],
+    "artifactsConsumed": [
+      "docs/brief.md [produced by bmad-product-brief]",
+      "docs/prfaq.md [produced by bmad-prfaq]",
+      "docs/recon/-research.md [produced by bmad-deep-recon]",
+      "Stakeholder Requirements [provided by User]"
+    ]
+  },
+  {
+    "name": "bmad-prfaq",
+    "description": "Working Backwards PRFAQ challenge that stress-tests a product concept customer-first via press releases and customer/internal FAQs.",
+    "phase": "Analysis",
+    "isDeprecated": false,
+    "apf_supported": true,
+    "requires_sandbox": false,
+    "invokes": [
+      "bmad-advanced-elicitation",
+      "bmad-review"
+    ],
+    "invokedBy": [
+      "bmad-agent-pm",
+      "bmad-help"
+    ],
+    "artifactsGenerated": [
+      "docs/prfaq.md"
+    ],
+    "artifactsConsumed": [
+      "Product Concept & Customer Personas [provided by User]",
+      "docs/brief.md [produced by bmad-product-brief]"
+    ]
+  },
+  {
+    "name": "bmad-product-brief",
+    "description": "Creates, updates, or validates a concise Product Brief summarizing goals, scope, and key success metrics.",
+    "phase": "Analysis",
+    "isDeprecated": false,
+    "apf_supported": true,
+    "requires_sandbox": false,
+    "invokes": [
+      "bmad-brainstorming",
+      "bmad-forge-idea",
+      "bmad-review"
+    ],
+    "invokedBy": [
+      "bmad-agent-analyst",
+      "bmad-agent-pm",
+      "bmad-help",
+      "bmad-prd"
+    ],
+    "artifactsGenerated": [
+      "docs/brief.md"
+    ],
+    "artifactsConsumed": [
+      "User Ideas & Problem Statements [provided by User]",
+      "docs/brainstorming-ideas.md [produced by bmad-brainstorming]",
+      "docs/forged-idea.md [produced by bmad-forge-idea]"
+    ]
+  },
+  {
+    "name": "bmad-project-context",
+    "description": "Sets up, refreshes, or audits a repository's AI agent instructions (AGENTS.md) and records agent pitfalls and rules.",
+    "phase": "Onboarding",
+    "isDeprecated": false,
+    "apf_supported": true,
+    "requires_sandbox": false,
+    "invokes": [],
+    "invokedBy": [
+      "bmad-document-project",
+      "bmad-generate-project-context",
+      "bmad-help"
+    ],
+    "artifactsGenerated": [
+      "AGENTS.md",
+      ".bmad/project-context.yaml"
+    ],
+    "artifactsConsumed": [
+      "Repository File Tree & Source Code [produced by User / bmad-build]",
+      "Build and Test Scripts [provided by User]"
+    ]
+  },
+  {
+    "name": "bmad-qa-generate-e2e-tests",
+    "description": "Generates end-to-end automated tests (Playwright/Cypress) for existing features and user flows.",
+    "phase": "Implementation",
+    "isDeprecated": false,
+    "apf_supported": true,
+    "requires_sandbox": true,
+    "invokes": [
+      "bmad-testarch-automate"
+    ],
+    "invokedBy": [
+      "bmad-help",
+      "bmad-tea"
+    ],
+    "artifactsGenerated": [
+      "e2e/**/*.spec.ts",
+      "Page object models",
+      "E2E test fixtures"
+    ],
+    "artifactsConsumed": [
+      "docs/prd.md [produced by bmad-prd]",
+      "docs/ux-design.md [produced by bmad-ux]",
+      "Application Source Code & Routes [produced by bmad-build / User]"
+    ]
+  },
+  {
+    "name": "bmad-quick-dev",
+    "description": "Deprecated forwarder skill that forwards to bmad-build for direct code modifications.",
+    "phase": "Implementation",
+    "isDeprecated": true,
+    "apf_supported": true,
+    "requires_sandbox": false,
+    "invokes": [
+      "bmad-build"
+    ],
+    "invokedBy": [
+      "bmad-help"
+    ],
+    "artifactsGenerated": [
+      "Application source code",
+      "Test files"
+    ],
+    "artifactsConsumed": [
+      "User Change Requests [provided by User]",
+      "Codebase Source Files [produced by User / bmad-build]"
+    ]
+  },
+  {
+    "name": "bmad-retrospective",
+    "description": "Runs evidence-based epic retrospectives, verifying deliverables against sources and rendering acceptance verdicts.",
+    "phase": "Implementation",
+    "isDeprecated": false,
+    "apf_supported": true,
+    "requires_sandbox": false,
+    "invokes": [],
+    "invokedBy": [
+      "bmad-help"
+    ],
+    "artifactsGenerated": [
+      "docs/retrospectives/-retro.md",
+      "Epic acceptance verdicts"
+    ],
+    "artifactsConsumed": [
+      "docs/sprint-status.yaml [produced by bmad-sprint-planning]",
+      "docs/epics-and-stories.md [produced by bmad-create-epics-and-stories]",
+      "Git Commit History & Test Logs [provided by VCS / Test runner]"
+    ]
+  },
+  {
+    "name": "bmad-review",
+    "description": "Multi-lens review engine over any diff, spec, doc, or artifact (adversarial, edge-case, verification-gap, structure, prose).",
+    "phase": "Other",
+    "isDeprecated": false,
+    "apf_supported": true,
+    "requires_sandbox": false,
+    "invokes": [],
+    "invokedBy": [
+      "bmad-advanced-elicitation",
+      "bmad-agent-architect",
+      "bmad-agent-ux-designer",
+      "bmad-architecture",
+      "bmad-code-review",
+      "bmad-create-epics-and-stories",
+      "bmad-editorial-review",
+      "bmad-editorial-review-prose",
+      "bmad-editorial-review-structure",
+      "bmad-help",
+      "bmad-prd",
+      "bmad-prfaq",
+      "bmad-product-brief",
+      "bmad-review-adversarial-general",
+      "bmad-review-edge-case-hunter",
+      "bmad-review-verification-gap",
+      "bmad-spec",
+      "bmad-ux"
+    ],
+    "artifactsGenerated": [
+      "docs/reviews/-review.md",
+      "Triage finding tables",
+      "Remediation checklists"
+    ],
+    "artifactsConsumed": [
+      "docs/prd.md [produced by bmad-prd]",
+      "docs/architecture.md [produced by bmad-architecture]",
+      "docs/brief.md [produced by bmad-product-brief]",
+      "docs/specs/.spec.md [produced by bmad-spec]",
+      "Git Diff / Source Code [produced by bmad-build / User]"
+    ]
+  },
+  {
+    "name": "bmad-review-adversarial-general",
+    "description": "Deprecated forwarder skill that forwards to bmad-review (adversarial general lens).",
+    "phase": "Other",
+    "isDeprecated": true,
+    "apf_supported": true,
+    "requires_sandbox": false,
+    "invokes": [
+      "bmad-review"
+    ],
+    "invokedBy": [
+      "bmad-help"
+    ],
+    "artifactsGenerated": [
+      "Adversarial review findings"
+    ],
+    "artifactsConsumed": [
+      "Target Documents or Code Diffs [produced by upstream BMad skills / User]"
+    ]
+  },
+  {
+    "name": "bmad-review-edge-case-hunter",
+    "description": "Deprecated forwarder skill that forwards to bmad-review (edge-case hunting lens).",
+    "phase": "Other",
+    "isDeprecated": true,
+    "apf_supported": true,
+    "requires_sandbox": false,
+    "invokes": [
+      "bmad-review"
+    ],
+    "invokedBy": [
+      "bmad-help"
+    ],
+    "artifactsGenerated": [
+      "Edge-case vulnerability reports"
+    ],
+    "artifactsConsumed": [
+      "docs/prd.md [produced by bmad-prd]",
+      "docs/specs/.spec.md [produced by bmad-spec]",
+      "Source Code Files [produced by bmad-build / User]"
+    ]
+  },
+  {
+    "name": "bmad-review-verification-gap",
+    "description": "Deprecated forwarder skill that forwards to bmad-review (verification gap lens).",
+    "phase": "Other",
+    "isDeprecated": true,
+    "apf_supported": true,
+    "requires_sandbox": false,
+    "invokes": [
+      "bmad-review"
+    ],
+    "invokedBy": [
+      "bmad-help"
+    ],
+    "artifactsGenerated": [
+      "Verification gap analysis reports"
+    ],
+    "artifactsConsumed": [
+      "docs/prd.md [produced by bmad-prd]",
+      "docs/test-plans/-test-plan.md [produced by bmad-testarch-test-design]",
+      "docs/specs/.spec.md [produced by bmad-spec]"
+    ]
+  },
+  {
+    "name": "bmad-spec",
+    "description": "Distills intent into the SPEC kernel and companion documents: the canonical, preservation-validated contract for downstream development.",
+    "phase": "Plan",
+    "isDeprecated": false,
+    "apf_supported": true,
+    "requires_sandbox": false,
+    "invokes": [
+      "bmad-review"
+    ],
+    "invokedBy": [
+      "bmad-create-epics-and-stories",
+      "bmad-help",
+      "bmad-loop-resolve"
+    ],
+    "artifactsGenerated": [
+      "docs/specs/.spec.md",
+      "Specification contracts"
+    ],
+    "artifactsConsumed": [
+      "docs/prd.md [produced by bmad-prd]",
+      "docs/architecture.md [produced by bmad-architecture]",
+      "User Requirements [provided by User]"
+    ]
+  },
+  {
+    "name": "bmad-sprint-planning",
+    "description": "Gates planning readiness, generates sprint tracking, summarizes sprint progress, and repairs tracking state.",
+    "phase": "Implementation",
+    "isDeprecated": false,
+    "apf_supported": true,
+    "requires_sandbox": false,
+    "invokes": [
+      "bmad-correct-course"
+    ],
+    "invokedBy": [
+      "bmad-agent-pm",
+      "bmad-build-auto",
+      "bmad-correct-course",
+      "bmad-help",
+      "bmad-sprint-status"
+    ],
+    "artifactsGenerated": [
+      "docs/sprint-status.yaml",
+      "Sprint readiness checklists"
+    ],
+    "artifactsConsumed": [
+      "docs/epics-and-stories.md [produced by bmad-create-epics-and-stories]",
+      "docs/architecture.md [produced by bmad-architecture]",
+      "docs/prd.md [produced by bmad-prd]"
+    ]
+  },
+  {
+    "name": "bmad-sprint-status",
+    "description": "Deprecated forwarder skill that forwards to bmad-sprint-planning (status view).",
+    "phase": "Plan",
+    "isDeprecated": true,
+    "apf_supported": true,
+    "requires_sandbox": false,
+    "invokes": [
+      "bmad-sprint-planning"
+    ],
+    "invokedBy": [
+      "bmad-help"
+    ],
+    "artifactsGenerated": [
+      "docs/sprint-status.yaml"
+    ],
+    "artifactsConsumed": [
+      "docs/sprint-status.yaml [produced by bmad-sprint-planning]"
+    ]
+  },
+  {
+    "name": "bmad-tea",
+    "description": "Master Test Architect and Quality Advisor persona (Murat) providing test architecture strategy, ATDD design, NFR evaluation, and test suite reviews.",
+    "phase": "Implementation",
+    "isDeprecated": false,
+    "apf_supported": true,
+    "requires_sandbox": false,
+    "invokes": [
+      "bmad-qa-generate-e2e-tests",
+      "bmad-testarch-atdd",
+      "bmad-testarch-automate",
+      "bmad-testarch-nfr",
+      "bmad-testarch-test-design",
+      "bmad-testarch-test-review",
+      "bmad-testarch-trace"
+    ],
+    "invokedBy": [
+      "bmad-help",
+      "bmad-party-mode"
+    ],
+    "artifactsGenerated": [
+      "docs/test-strategy.md",
+      "Test audit reports",
+      "Quality gate summaries"
+    ],
+    "artifactsConsumed": [
+      "docs/prd.md [produced by bmad-prd]",
+      "docs/architecture.md [produced by bmad-architecture]",
+      "Existing Test Suites & Source Code [produced by bmad-build / User]"
+    ]
+  },
+  {
+    "name": "bmad-teach-me-testing",
+    "description": "Teaches testing progressively through structured, hands-on interactive sessions covering unit testing, integration tests, and TDD.",
+    "phase": "Other",
+    "isDeprecated": false,
+    "apf_supported": true,
+    "requires_sandbox": true,
+    "invokes": [],
+    "invokedBy": [
+      "bmad-help"
+    ],
+    "artifactsGenerated": [
+      "Interactive lesson notes",
+      "Practice test exercises"
+    ],
+    "artifactsConsumed": [
+      "User Learning Goals [provided by User]",
+      "Codebase Test Examples [produced by bmad-build / User]"
+    ]
+  },
+  {
+    "name": "bmad-technical-research",
+    "description": "Deprecated forwarder skill that forwards to bmad-deep-recon (technical research type).",
+    "phase": "Analysis",
+    "isDeprecated": true,
+    "apf_supported": true,
+    "requires_sandbox": false,
+    "invokes": [
+      "bmad-deep-recon"
+    ],
+    "invokedBy": [
+      "bmad-agent-architect",
+      "bmad-help"
+    ],
+    "artifactsGenerated": [
+      "docs/recon/technical-research.md"
+    ],
+    "artifactsConsumed": [
+      "Technical Evaluation Queries [provided by User / bmad-agent-architect]"
+    ]
+  },
+  {
+    "name": "bmad-testarch-atdd",
+    "description": "Generates red-phase acceptance test scaffolds using the TDD cycle prior to story implementation.",
+    "phase": "Implementation",
+    "isDeprecated": false,
+    "apf_supported": true,
+    "requires_sandbox": true,
+    "invokes": [],
+    "invokedBy": [
+      "bmad-agent-dev",
+      "bmad-build",
+      "bmad-help",
+      "bmad-tea"
+    ],
+    "artifactsGenerated": [
+      "tests/acceptance/**/*.spec.ts",
+      "tests/acceptance/**/test_*.py",
+      "Red-phase test scaffolds"
+    ],
+    "artifactsConsumed": [
+      "docs/stories/.md [produced by bmad-create-epics-and-stories]",
+      "docs/architecture.md [produced by bmad-architecture]"
+    ]
+  },
+  {
+    "name": "bmad-testarch-automate",
+    "description": "Expands automated unit, integration, and component test coverage across the existing codebase.",
+    "phase": "Implementation",
+    "isDeprecated": false,
+    "apf_supported": true,
+    "requires_sandbox": true,
+    "invokes": [],
+    "invokedBy": [
+      "bmad-agent-dev",
+      "bmad-help",
+      "bmad-qa-generate-e2e-tests",
+      "bmad-tea"
+    ],
+    "artifactsGenerated": [
+      "tests/**/*.test.ts",
+      "tests/**/test_*.py",
+      "Test fixture files"
+    ],
+    "artifactsConsumed": [
+      "Application Source Code [produced by bmad-build / User]",
+      "Existing Test Suites & Coverage Reports [produced by bmad-testarch-framework / Test runner]"
+    ]
+  },
+  {
+    "name": "bmad-testarch-ci",
+    "description": "Scaffolds CI/CD quality pipelines, automated test runs, coverage thresholds, and quality gate triggers.",
+    "phase": "Implementation",
+    "isDeprecated": false,
+    "apf_supported": true,
+    "requires_sandbox": true,
+    "invokes": [],
+    "invokedBy": [
+      "bmad-help",
+      "bmad-tea"
+    ],
+    "artifactsGenerated": [
+      ".github/workflows/ci.yml",
+      "Test runner scripts",
+      "Pre-commit quality hooks"
+    ],
+    "artifactsConsumed": [
+      "package.json / pyproject.toml [provided by User]",
+      "Test Runner Configurations [produced by bmad-testarch-framework / User]"
+    ]
+  },
+  {
+    "name": "bmad-testarch-framework",
+    "description": "Initializes and configures test frameworks (Playwright, Cypress, Vitest, Jest, Pytest) and test environment helpers.",
+    "phase": "Implementation",
+    "isDeprecated": false,
+    "apf_supported": true,
+    "requires_sandbox": true,
+    "invokes": [],
+    "invokedBy": [
+      "bmad-help",
+      "bmad-tea"
+    ],
+    "artifactsGenerated": [
+      "playwright.config.ts",
+      "vitest.config.ts",
+      "pytest.ini",
+      "Test helper utilities"
+    ],
+    "artifactsConsumed": [
+      "package.json / pyproject.toml [provided by User]",
+      "docs/architecture.md [produced by bmad-architecture]"
+    ]
+  },
+  {
+    "name": "bmad-testarch-nfr",
+    "description": "Audits Non-Functional Requirements (NFR) evidence across performance benchmarks, security scans, reliability, and scalability.",
+    "phase": "Implementation",
+    "isDeprecated": false,
+    "apf_supported": true,
+    "requires_sandbox": true,
+    "invokes": [],
+    "invokedBy": [
+      "bmad-help",
+      "bmad-tea"
+    ],
+    "artifactsGenerated": [
+      "docs/nfr-audit-report.md",
+      "Benchmark scorecards"
+    ],
+    "artifactsConsumed": [
+      "docs/architecture.md [produced by bmad-architecture]",
+      "Benchmark & Load Test Results [provided by Test runner]",
+      "Security Scan Logs [provided by Security tools]"
+    ]
+  },
+  {
+    "name": "bmad-testarch-test-design",
+    "description": "Creates comprehensive system-level or epic-level test plans, test strategies, and risk matrices.",
+    "phase": "Planning",
+    "isDeprecated": false,
+    "apf_supported": true,
+    "requires_sandbox": false,
+    "invokes": [],
+    "invokedBy": [
+      "bmad-agent-architect",
+      "bmad-help",
+      "bmad-tea"
+    ],
+    "artifactsGenerated": [
+      "docs/test-plans/-test-plan.md",
+      "Test strategy matrices"
+    ],
+    "artifactsConsumed": [
+      "docs/prd.md [produced by bmad-prd]",
+      "docs/architecture.md [produced by bmad-architecture]",
+      "docs/epics-and-stories.md [produced by bmad-create-epics-and-stories]"
+    ]
+  },
+  {
+    "name": "bmad-testarch-test-review",
+    "description": "Reviews test quality, test maintainability, assertion strength, and test suite anti-patterns against industry best practices.",
+    "phase": "Implementation",
+    "isDeprecated": false,
+    "apf_supported": true,
+    "requires_sandbox": true,
+    "invokes": [],
+    "invokedBy": [
+      "bmad-help",
+      "bmad-tea"
+    ],
+    "artifactsGenerated": [
+      "docs/test-review-audit.md",
+      "Test refactoring checklists"
+    ],
+    "artifactsConsumed": [
+      "Existing Test Files [produced by bmad-testarch-automate / bmad-build / User]",
+      "Test Runner Logs & Coverage Reports [provided by Test runner]"
+    ]
+  },
+  {
+    "name": "bmad-testarch-trace",
+    "description": "Generates a requirements traceability matrix mapping stories and acceptance criteria to automated test cases and renders quality gate decisions.",
+    "phase": "Implementation",
+    "isDeprecated": false,
+    "apf_supported": true,
+    "requires_sandbox": true,
+    "invokes": [],
+    "invokedBy": [
+      "bmad-help",
+      "bmad-tea"
+    ],
+    "artifactsGenerated": [
+      "docs/traceability-matrix.md",
+      "Quality gate decision records"
+    ],
+    "artifactsConsumed": [
+      "docs/epics-and-stories.md [produced by bmad-create-epics-and-stories]",
+      "docs/prd.md [produced by bmad-prd]",
+      "Test Execution Logs [provided by Test runner]"
+    ]
+  },
+  {
+    "name": "bmad-ux",
+    "description": "Plans UX interaction patterns, UI components, layout structures, and design specifications.",
+    "phase": "Planning",
+    "isDeprecated": false,
+    "apf_supported": true,
+    "requires_sandbox": false,
+    "invokes": [
+      "bmad-review"
+    ],
+    "invokedBy": [
+      "bmad-agent-ux-designer",
+      "bmad-help"
+    ],
+    "artifactsGenerated": [
+      "docs/ux-design.md",
+      "UI layout specifications",
+      "Design token definitions"
+    ],
+    "artifactsConsumed": [
+      "docs/prd.md [produced by bmad-prd]",
+      "docs/brief.md [produced by bmad-product-brief]",
+      "User Personas & User Journeys [provided by User / bmad-agent-pm]"
+    ]
+  },
+  {
+    "name": "bmad-validate-prd",
+    "description": "Deprecated forwarder skill that forwards to bmad-prd (validate intent).",
+    "phase": "Plan",
+    "isDeprecated": true,
+    "apf_supported": true,
+    "requires_sandbox": false,
+    "invokes": [
+      "bmad-prd"
+    ],
+    "invokedBy": [
+      "bmad-help"
+    ],
+    "artifactsGenerated": [
+      "PRD validation reports"
+    ],
+    "artifactsConsumed": [
+      "docs/prd.md [produced by bmad-prd]"
+    ]
+  },
+  {
+    "name": "bmad-workflow-builder",
+    "description": "Builds, edits, and validates multi-step agent workflows, execution sequences, and skill configurations.",
+    "phase": "Other",
+    "isDeprecated": false,
+    "apf_supported": false,
+    "requires_sandbox": false,
+    "invokes": [
+      "bmad-eval-runner"
+    ],
+    "invokedBy": [
+      "bmad-agent-builder",
+      "bmad-help",
+      "bmad-module-builder"
+    ],
+    "artifactsGenerated": [
+      ".bmad/workflows/.yaml",
+      "Workflow schema templates"
+    ],
+    "artifactsConsumed": [
+      "Workflow Requirements [provided by User]",
+      "Skill Step Definitions [produced by bmad-agent-builder]"
+    ]
+  }
+]

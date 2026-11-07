@@ -1,0 +1,23 @@
+{
+  "tabName": "ANALYSIS",
+  "quickActionName": "Architecture",
+  "description": "Conversation fixture for Analysis phase Architecture skill flow",
+  "fileNamePattern": "architecture\\.md",
+  "turns": [
+    {
+      "turnIndex": 1,
+      "agentKeyword": "system overview",
+      "userReply": "(Recommended) Use Go backend API with embedded templates and Next.js frontend UI."
+    },
+    {
+      "turnIndex": 2,
+      "agentKeyword": "database",
+      "userReply": "Use Cloud Firestore with multitenant organization context resolution."
+    },
+    {
+      "turnIndex": 3,
+      "agentKeyword": "proceed",
+      "userReply": "Proceed"
+    }
+  ]
+}

@@ -1,0 +1,224 @@
+{
+  "catalog": [
+    {
+      "target": "#tour-projects-list",
+      "title": "Welcome to Agentic Foundry! 🚀",
+      "description": "This is your Project Catalog. Here you can browse and manage all of your Foundry-powered development projects.",
+      "placement": "bottom",
+      "sectionId": "catalog-overview",
+      "sectionTitle": "Catalog Overview"
+    },
+    {
+      "target": "#tour-leftbar",
+      "title": "Global Navigation Menu 🗺️",
+      "description": "Use the left sidebar navigation to toggle between your active workspace, project catalogs, and configurations.",
+      "placement": "right",
+      "sectionId": "catalog-overview",
+      "sectionTitle": "Catalog Overview"
+    },
+    {
+      "target": "#tour-leftbar-settings",
+      "title": "Configure Settings 🔑",
+      "description": "Click the Settings icon to configure your preferences and security tokens.",
+      "placement": "right",
+      "isAction": true,
+      "sectionId": "catalog-overview",
+      "sectionTitle": "Catalog Overview"
+    },
+    {
+      "target": "#tour-settings-nav",
+      "title": "Settings Navigation 🎛️",
+      "description": "Jump to specific settings using the navigation bar.",
+      "placement": "right",
+      "sectionId": "settings-integration",
+      "sectionTitle": "User Settings"
+    },
+    {
+      "target": "#tour-settings-appearance",
+      "title": "Visual Preferences 🎨",
+      "description": "Toggle between Light and Premium Dark modes.",
+      "placement": "bottom",
+      "sectionId": "settings-integration",
+      "sectionTitle": "User Settings"
+    },
+    {
+      "target": "#tour-settings-credentials",
+      "title": "Application Credentials 🗝️",
+      "description": "Configure secure credentials for integrations. AI agents use these credentials to perform automated operations.",
+      "placement": "top",
+      "sectionId": "settings-integration",
+      "sectionTitle": "User Settings"
+    },
+    {
+      "target": "#tour-settings-card-github",
+      "title": "Enable GitHub Integration 🔌",
+      "description": "Click to enable the GitHub integration if you have a personal access token. Don't worry if you don't have a personal access token, this can be configured later.",
+      "placement": "top",
+      "sectionId": "settings-integration",
+      "sectionTitle": "User Settings"
+    },
+    {
+      "target": "#tour-secrets-modal-input",
+      "title": "Personal Access Token 🔑",
+      "description": "Input your GitHub Personal Access Token (PAT) here so agents can access your repositories. These tokens are stored securely per-user, encrypted at rest, and masked in the UI.",
+      "placement": "bottom",
+      "sectionId": "settings-integration",
+      "sectionTitle": "User Settings"
+    },
+    {
+      "target": "#tour-settings-validate-github",
+      "title": "Validate Connection 🔌",
+      "description": "Click 'Validate Link' to test your credentials. Note: valid credentials are recommended to complete the full onboarding workflow.",
+      "placement": "bottom",
+      "isAction": true,
+      "sectionId": "settings-integration",
+      "sectionTitle": "User Settings"
+    },
+    {
+      "target": "#tour-settings-save-github",
+      "title": "Save Credentials 💾",
+      "description": "Save credentials to store this token securely under your profile.",
+      "placement": "bottom",
+      "isAction": true,
+      "sectionId": "settings-integration",
+      "sectionTitle": "User Settings"
+    },
+    {
+      "target": "#tour-leftbar-projects",
+      "title": "Go Back to Projects list 📂",
+      "description": "Click Projects to go back to the catalog list page",
+      "placement": "right",
+      "isAction": true,
+      "sectionId": "settings-integration",
+      "sectionTitle": "User Settings"
+    },
+    {
+      "target": "#tour-catalog-create",
+      "title": "Create a Project 🏗️",
+      "description": "Now let's launch a new project. Click 'Create Project'",
+      "placement": "left",
+      "isAction": true,
+      "sectionId": "catalog-overview",
+      "sectionTitle": "Catalog Overview"
+    },
+    {
+      "target": "#tour-general-config-card",
+      "title": "General Configuration 📝",
+      "description": "First, give your project a unique name and detailed description.",
+      "placement": "bottom",
+      "sectionId": "project-creation",
+      "sectionTitle": "Create Project"
+    },
+    {
+      "target": "#tour-project-github-repo",
+      "title": "Select Repository 📂",
+      "description": "Select the specific GitHub repository this project is bound to.",
+      "placement": "bottom",
+      "isAction": true,
+      "sectionId": "project-creation",
+      "sectionTitle": "Create Project"
+    },
+    {
+      "target": "#tour-project-save-button",
+      "title": "Save Project Changes 💾",
+      "description": "Click 'Save' to initialize your project.",
+      "placement": "bottom",
+      "isAction": true,
+      "sectionId": "project-creation",
+      "sectionTitle": "Create Project"
+    },
+    {
+      "target": "#tour-toggle-list-view",
+      "title": "Switch to List View 📋",
+      "description": "Try switching to the List View to see a more compact representation of your projects.",
+      "placement": "bottom",
+      "isAction": true,
+      "sectionId": "catalog-complete",
+      "sectionTitle": "Get Started"
+    },
+    {
+      "target": "#tour-catalog-tabs",
+      "title": "Toggle Shared Projects 📂",
+      "description": "Click on 'Shared Projects' tab to see projects shared by other members in the database.",
+      "placement": "bottom",
+      "isAction": true,
+      "sectionId": "catalog-complete",
+      "sectionTitle": "Get Started"
+    },
+    {
+      "target": ".tour-project-launch-button",
+      "title": "Begin Onboarding! 🚀",
+      "description": "Click 'Onboard' on your newly created project card to launch the workspace and start collaborating with AI agents!",
+      "placement": "left",
+      "isAction": true,
+      "sectionId": "catalog-complete",
+      "sectionTitle": "Get Started"
+    }
+  ],
+  "workspace": [
+    {
+      "target": "#tour-workspace-phases",
+      "title": "Multi-Phase Workflow Gates 🏁",
+      "description": "APF guides projects through 5 sequential gates: Onboarding, Analysis, Planning, Solutioning, and Implementation. Satisfying phase criteria unlocks subsequent gates, with progress tracked by live status bubbles.",
+      "placement": "bottom",
+      "sectionId": "workspace-overview",
+      "sectionTitle": "Workspace Overview"
+    },
+    {
+      "target": "#tour-workspace-sidebar",
+      "title": "Orchestration Control Panel 🎛️",
+      "description": "This collapsible sidebar organizes your workspace history, actions and artifacts.",
+      "placement": "right",
+      "sectionId": "workspace-overview",
+      "sectionTitle": "Workspace Overview"
+    },
+    {
+      "target": "#tour-workspace-chat-section",
+      "title": "Chat Section 💬",
+      "description": "This is where you can see your current and previous conversations",
+      "placement": "right",
+      "sectionId": "workspace-overview",
+      "sectionTitle": "Workspace Overview"
+    },
+    {
+      "target": "#tour-workspace-quick-actions",
+      "title": "Quick Actions ⚡",
+      "description": "Run workflows using these quick action buttons",
+      "placement": "right",
+      "sectionId": "workspace-overview",
+      "sectionTitle": "Workspace Overview"
+    },
+    {
+      "target": "#tour-workspace-file-explorer",
+      "title": "File Explorer & Phase Artifacts 📁",
+      "description": "Navigate artifacts generated for the active phase with live status indicators, or toggle 'Show All' to browse the complete project filesystem.",
+      "placement": "right",
+      "sectionId": "workspace-overview",
+      "sectionTitle": "Workspace Overview"
+    },
+    {
+      "target": "#tour-workspace-chat",
+      "title": "Autonomous Agent Workspace 💬",
+      "description": "Engage your agent! Type instructions, switch agent personas, observe live thinking steps, and watch as the agent runs background commands or edits documents.",
+      "placement": "right",
+      "sectionId": "workspace-overview",
+      "sectionTitle": "Workspace Overview"
+    },
+    {
+      "target": "#tour-chat-file-upload-button",
+      "title": "Context Integration (File Upload) 📎",
+      "description": "Upload local specifications, designs, or code files to provide rich context to your agent. Supported formats include text, PDF, and images (Max 10MB).",
+      "placement": "top",
+      "sectionId": "workspace-overview",
+      "sectionTitle": "Workspace Overview"
+    },
+    {
+      "target": "#tour-workspace-canvas",
+      "title": "Live Document & Design Canvas 🎨",
+      "description": "View the output in real-time! Explore generated markdown specifications, directly modify files, inspect code changes via diff previews, or complete reviews.",
+      "placement": "left",
+      "sectionId": "workspace-overview",
+      "sectionTitle": "Workspace Overview"
+    }
+  ]
+}

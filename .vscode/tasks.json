@@ -1,0 +1,282 @@
+{
+  "version": "2.0.0",
+  "options": {
+    "shell": {
+      "executable": "/bin/bash",
+      "args": [
+        "-i",
+        "-c"
+      ]
+    }
+  },
+  "tasks": [
+    {
+      "label": "Start Api Hot Reload",
+      "type": "shell",
+      "command": "mise run dev-api",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "go",
+        "pattern": {
+          "regexp": "^.*$"
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "(.*building.*|.*running.*)",
+          "endsPattern": "(API server listening at|Starting server on.*)"
+        }
+      },
+      "dependsOn": [
+        "Kill Api"
+      ]
+    },
+    {
+      "label": "Start Agents Hot Reload",
+      "type": "shell",
+      "command": "mise run dev-ai",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "go",
+        "pattern": {
+          "regexp": "^.*$"
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "(.*Starting the web server.*)",
+          "endsPattern": "(you can access API using.*)"
+        }
+      },
+      "dependsOn": [
+        "Kill Ai"
+      ]
+    },
+    {
+      "label": "🚀 Launch All Services (Mise)",
+      "type": "shell",
+      "command": "mise run local",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "🗄️ Launch Local Databases & Seed (Part 1)",
+      "type": "shell",
+      "command": "mise run dev-db",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "🚀 Launch Application Processes (Part 2)",
+      "type": "shell",
+      "command": "mise run dev-apps",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "🛠️ Setup Developer Environment (Mise)",
+      "type": "shell",
+      "command": "mise run env-setup",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "🛑 Stop All Services (Mise)",
+      "type": "shell",
+      "command": "mise run kill-all",
+      "presentation": {
+        "reveal": "silent"
+      }
+    },
+    {
+      "label": "Kill All",
+      "type": "shell",
+      "command": "mise run kill-all",
+      "presentation": {
+        "reveal": "silent"
+      }
+    },
+    {
+      "label": "Kill Ui",
+      "type": "shell",
+      "command": "mise run kill-ui",
+      "presentation": {
+        "reveal": "silent",
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "Kill Ai",
+      "type": "shell",
+      "command": "mise run kill-ai",
+      "presentation": {
+        "reveal": "silent",
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "Kill Api",
+      "type": "shell",
+      "command": "mise run kill-api",
+      "presentation": {
+        "reveal": "silent",
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "Kill pgAdmin",
+      "type": "shell",
+      "command": "mise run kill-pgadmin",
+      "presentation": {
+        "reveal": "silent",
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "Kill Firebase",
+      "type": "shell",
+      "command": "mise run kill-firebase",
+      "presentation": {
+        "reveal": "silent",
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "Delete Ai Debug File",
+      "type": "shell",
+      "command": "rm __debug_bin* || true && rm ai || true && rm tmp -rf || true",
+      "presentation": {
+        "reveal": "silent"
+      },
+      "options": {
+        "cwd": "${workspaceFolder}/ai"
+      }
+    },
+    {
+      "label": "Delete Api Debug File",
+      "type": "shell",
+      "command": "rm __debug_bin* || true && rm api || true && rm tmp -rf || true",
+      "presentation": {
+        "reveal": "silent"
+      },
+      "options": {
+        "cwd": "${workspaceFolder}/api"
+      }
+    },
+    {
+      "label": "Run Cloud SQL Proxy",
+      "type": "shell",
+      "command": "mise run db:proxy",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "custom",
+        "pattern": {
+          "regexp": "^.*$"
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "Authorizing with Application Default Credentials",
+          "endsPattern": "The proxy has started successfully and is ready for new connections!"
+        }
+      }
+    },
+    {
+      "label": "Firebase",
+      "type": "shell",
+      "command": "mise run db:emulators",
+      "dependsOn": [
+        "Kill Firebase"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "custom",
+        "pattern": {
+          "regexp": "^.*$"
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "Starting emulators",
+          "endsPattern": "All emulators ready"
+        }
+      }
+    },
+    {
+      "label": "Seed ADK Session DB",
+      "type": "shell",
+      "command": "go run seed/main.go",
+      "options": {
+        "cwd": "${workspaceFolder}/ai"
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "dependsOn": [
+        "Run Cloud SQL Proxy"
+      ]
+    },
+    {
+      "label": "Clean ADK Session DB",
+      "type": "shell",
+      "command": "go run seed/main.go -clean",
+      "options": {
+        "cwd": "${workspaceFolder}/ai"
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "dependsOn": [
+        "Run Cloud SQL Proxy"
+      ]
+    },
+    {
+      "label": "Start Local DB",
+      "type": "shell",
+      "command": "mise run db:session-start",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "presentation": {
+        "reveal": "silent"
+      }
+    },
+    {
+      "label": "Prep Ai",
+      "dependsOn": [
+        "Kill Ai",
+        "Start Local DB"
+      ]
+    }
+  ]
+}

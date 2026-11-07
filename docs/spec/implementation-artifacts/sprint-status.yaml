@@ -1,0 +1,224 @@
+# Copyright 2026 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# generated: 05-21-2026 18:47
+# last_updated: 08-31-2026 17:31
+# project: Delta Product Foundry
+# project_key: APF
+# tracking_system: file-system
+# story_location: docs/spec/implementation-artifacts
+
+# STATUS DEFINITIONS:
+# ==================
+# Epic Status:
+#   - backlog: Epic not yet started
+#   - in-progress: Epic actively being worked on
+#   - done: All stories in epic completed
+#
+# Epic Status Transitions:
+#   - backlog → in-progress: Automatically when first story is created (via create-story)
+#   - in-progress → done: Manually when all stories reach 'done' status
+#
+# Story Status:
+#   - backlog: Story only exists in epic file
+#   - ready-for-dev: Story file created in stories folder
+#   - in-progress: Developer actively working on implementation
+#   - review: Ready for code review (via Dev's code-review workflow)
+#   - done: Story completed
+#
+# Retrospective Status:
+#   - optional: Can be completed but not required
+#   - done: Retrospective has been completed
+#
+# WORKFLOW NOTES:
+# ===============
+# - Epic transitions to 'in-progress' automatically when first story is created
+# - Stories can be worked in parallel if team capacity allows
+# - Developer typically creates next story after previous one is 'done' to incorporate learnings
+# - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
+
+generated: '05-21-2026 18:47'
+last_updated: '08-31-2026 17:31'
+project: APF
+project_key: APF
+tracking_system: file-system
+story_location: docs/spec/implementation-artifacts
+
+development_status:
+  epic-1: done
+  1-1-interactive-node-grid-layout: done
+  1-2-agent-sidebar-chat: done
+  1-3-secure-canvas-workspace-infrastructure: done
+  1-4-contextual-artifact-sidebar: done
+  1-5-cancel-chat-message: done
+  epic-1-retrospective: optional
+
+  epic-2: done
+  2-1-idea-to-production-pipeline-tracking-bar: done
+  2-2-live-cross-agent-activity-feed: done
+  2-3-user-level-secrets-management-settings-screen: done
+  2-4-project-level-app-integration-dynamic-settings: done
+  epic-2-retrospective: optional
+
+  epic-3: backlog
+  3-1-figma-sync-adapter: backlog
+  3-2-native-idp-schema-connector: backlog
+  3-3-antigravity-json-rpc-hydration-outpost: backlog
+  epic-3-retrospective: optional
+
+  epic-4: in-progress
+  4-1-git-state-sync-tracker: done
+  4-2-tabbed-workspace-explorer-artifacts-and-file-explorer-views: done
+  4-3-automated-pull-request-handoff-and-remote-vcs-integration: done
+  4-4-git-to-workspace-spec-re-hydration-and-edit-sync: done
+  4-5-git-commit-safety-guardrails: backlog
+  4-6-file-to-database-artifact-synchronization: backlog
+  4-7-centralize-git-and-version-control-in-api-tier: ready-for-dev
+  4-8-on-demand-recursive-file-explorer-component-and-api: done
+  4-9-transactional-git-workspace-snapshotting-local-state-preserv: backlog
+  4-10-dry-run-rebase-engine-collision-detection: backlog
+  4-11-structured-git-sync-response-github-gitlab-integration: backlog
+  4-12-interactive-git-sync-checklist-modal-ui-conflict-resolution: backlog
+  4-13-unified-file-explorer-with-phase-associated-artifacts-status: backlog
+  4-14-automated-pre-commit-safety-checks-gitignore-lifecycle-manag: backlog
+  epic-4-retrospective: optional
+
+  epic-5: in-progress
+  5-1-python-antigravity-chat-inference-engine: done
+  5-2-go-dynamic-reverse-proxy-ai-gateway: done
+  5-3-antigravity-dynamic-tool-execution-adapter: ready-for-dev
+  5-4-adk-postgresql-session-db-telemetry-aggregation-engine-gorm: backlog
+  5-5-sandboxed-uv_run-tool-execution-engine-for-bmad-scripts-pyth: backlog
+  5-6-cloud-run-container-image-packaging-infrastructure-provision: backlog
+  epic-5-retrospective: optional
+
+  epic-6: backlog
+  6-1-audit-trail-event-capture: backlog
+  epic-6-retrospective: optional
+
+  epic-7: in-progress
+  7-1-project-lifecycle-states-dashboard-action-buttons: backlog
+  7-2-background-discovery-agent-stack-analysis: review
+  7-3-legacy-specification-audit-ingestion-picker: backlog
+  7-4-explicit-onboarding-completion: backlog
+  epic-7-retrospective: optional
+
+  epic-8: backlog
+  8-1-chat-file-upload-ui-mvp: backlog
+  8-2-backend-file-upload-api-mvp: backlog
+  8-3-contextual-artifact-sidebar-db-tracking-mvp: backlog
+  8-4-agent-context-ingestion-mvp: backlog
+  epic-8-retrospective: optional
+
+  epic-9: in-progress
+  9-1-onboarding-tour-state-persistence-backend-firestore: backlog
+  9-2-tour-integration-for-newly-created-sections-frontend: done
+  9-3-advanced-navigation-skip-section-and-skip-tour-frontend: done
+  9-4-tour-resiliency-action-gating-frontend-backend: backlog
+  9-5-context-aware-auto-start-triggers-frontend: backlog
+  9-6-seeded-showcase-project-foundry-showcase-frontend-backend: done
+  epic-9-retrospective: optional
+
+  epic-10: in-progress
+  10-1-data-partitioning-by-organization-id-across-all-storage-medi: backlog
+  10-2-organization-aware-non-administrative-data-plane-apis: done
+  10-3-organization-provisioning-onboarding-administrative-api: backlog
+  10-4-organization-environment-configuration-user-management: backlog
+  10-5-multi-tenant-login-organization-selection-ui-flow: backlog
+  10-6-active-organization-switcher-multi-tenant-developer-simulati: backlog
+  10-7-super-admin-autojoin-configuration-and-auto-provisioning: done
+  epic-10-retrospective: optional
+
+  epic-11: in-progress
+  11-1-google-identity-platform-configuration-infrastructure-provis: backlog
+  11-2-identity-aware-proxy-iap-token-validation-middleware: done
+  11-3-system-administration-organization-provisioning-screen-syste: backlog
+  11-4-organization-settings-member-directory-user-management-scree: backlog
+  11-5-organization-settings-invite-member-modal-invitation-flow: backlog
+  11-6-organization-settings-roles-permissions-configuration-screen: backlog
+  11-7-invited-user-experience-tenant-scoped-login-invitation-accep: backlog
+  11-8-parent-project-super-admin-authentication-global-resource-au: backlog
+  11-9-multi-tenant-identity-verification-and-fail-safe-security-co: backlog
+  11-10-application-admin-performance-operational-telemetry-dashboar: backlog
+  11-11-admin-portal-ai-token-usage-cost-analytics-dashboard-screen: backlog
+  epic-11-retrospective: optional
+
+  epic-12: in-progress
+  12-7-nfs-volume-and-folder-level-metadata-management-system-admin: done
+  12-8-housekeeping-job-framework-registry-cli-dispatcher: done
+  12-9-modular-housekeeping-jobs-nfs-storage-audit-orphaned-workspa: done
+  12-10-multi-binary-container-packaging-in-api-dockerfile-ci-cd-pip: done
+  12-11-cloud-run-v2-job-cloud-scheduler-terraform-infrastructure: done
+  12-12-super-admin-on-demand-job-execution-api-admin-portal-trigger: done
+  12-13-super-admin-jobs-catalog-cloud-run-execution-history-backend: done
+  12-14-super-admin-jobs-dashboard-execution-history-portal-ui-admin: done
+  epic-12-retrospective: optional
+
+  epic-13: in-progress
+  13-1-mobile-projects-dashboard-screen: review
+  13-2-mobile-agent-chat-workspace-screen: backlog
+  13-3-mobile-touch-canvas-node-workflow-screen: backlog
+  13-4-mobile-workspace-explorer-spec-viewer-screen: backlog
+  13-5-mobile-user-settings-api-secrets-screen: backlog
+  13-6-mobile-product-onboarding-tour-screen-overlays: backlog
+  13-7-mobile-push-notifications-task-sync-engine: backlog
+  epic-13-retrospective: optional
+
+  epic-14: in-progress
+  14-1-k6-performance-test-suite-scaffolding-directory-structure: backlog
+  14-2-performance-test-data-seeding-synthetic-environment-fixtures: backlog
+  14-3-distributed-multi-cluster-load-test-harness-200-concurrent-u: backlog
+  14-4-real-time-websocket-sse-streaming-latency-benchmarking-suite: backlog
+  14-5-ci-cd-performance-regression-quality-gates-telemetry-alarmin: backlog
+  epic-14-retrospective: optional
+
+  epic-15: in-progress
+  15-1-gemini-api-key-management: done
+  15-2-application-level-feature-flags-on-demand-feature-document-l: backlog
+  15-3-feedback-collection-modal-component-top-banner-triggers: backlog
+  epic-15-retrospective: optional
+
+  epic-16: in-progress
+  16-1-unified-toolset-provisioning-across-all-agent-swarms: ready-for-dev
+  16-2-uvrunnertool-binary-command-guardrails-tool-redirect-guidanc: backlog
+  16-3-native-project-toml-workspace-configuration-seeding: ready-for-dev
+  16-4-elimination-of-brittle-in-flight-config-rewrites-and-markdow: backlog
+  16-5-consolidation-of-path-safety-sandboxing-zero-trust-boundary: backlog
+  16-6-end-to-end-regression-test-suite-for-brainstorming-activatio: backlog
+  epic-16-retrospective: optional
+
+  epic-17: backlog
+  17-1-generic-email-notification-adapter-subsystem-provider-regist: backlog
+  17-2-custom-notification-provider-cnp-provider-implementation-aut: backlog
+  17-3-api-notification-handler-routing-opentelemetry-tracing: backlog
+  17-4-notifications-infrastructure-provisioning-iam-roles-cloud-de: backlog
+  epic-17-retrospective: optional
+
+  epic-18: done
+  18-1-multi-tier-artifactservice-configuration-infrastructure-back: done
+  18-2-chat-file-multimodal-image-upload-ui-frontend: done
+  18-3-multimodal-text-prompt-context-ingestion-ai-orchestrator: done
+  18-4-file-explorer-folder-actions-project-tree-uploads-full-stack: done
+  18-5-chat-session-collapsible-chevron-artifacts-dropdown-frontend: done
+  18-6-image-artifact-preview-media-viewer-frontend: done
+  epic-18-retrospective: optional
+
+  epic-19: backlog
+  19-1-implementation-tab-build-sandbox-action-stack-discovery-skil: done
+  19-2-autonomous-specification-scanning-runtime-stack-discovery-ag: done
+  19-3-interactive-sandbox-stack-configuration-table-ui-add-edit-re: done
+  19-4-autonomous-dockerfile-synthesis-sandbox-plan-generation: done
+  19-5-isolated-container-build-engine-verification-test-harness: done
+  19-6-container-runtime-health-sweeps-ephemeral-deployment-live-di: done
+  epic-19-retrospective: optional

@@ -1,0 +1,12 @@
+.git
+**/.git
+**/node_modules
+**/.next
+**/dist
+**/build
+**/.cache
+**/tmp
+.agents
+docs
+ui/node_modules
+ui/.next

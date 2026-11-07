@@ -1,0 +1,38 @@
+{
+  "id": "oTfDD1oT8ZgRqnk0hd56",
+  "name": "Local Test",
+  "description": "",
+  "status": "Onboarding",
+  "ownerId": "org-owner@the-high-council.com",
+  "visibility": "public",
+  "baseBranch": "main",
+  "icon": "🚀",
+  "members": {
+    "org-owner@the-high-council.com": "owner"
+  },
+  "governanceGates": {
+    "ANALYSIS": "Not Started",
+    "PLANNING": "Not Started",
+    "SOLUTIONING": "Not Started",
+    "IMPLEMENTATION": "Not Started",
+    "ONBOARDING": "Not Started"
+  },
+  "bmadConfig": {
+    "specFolder": "docs/spec",
+    "implementationArtifactsPath": "implementation",
+    "planningArtifactsPath": "plans",
+    "testingArtifactsPath": "test"
+  },
+  "app_integrations": [
+    {
+      "integration_id": "github",
+      "enabled": true,
+      "settings": {}
+    },
+    {
+      "integration_id": "gemini",
+      "enabled": true,
+      "settings": {}
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+[
+  {
+    "id": "scenario-e2e-collaboration",
+    "name": "End-to-End Collaboration Journey",
+    "url": "http://localhost:8082/?enable-semantics=true",
+    "description": "Demonstrates the complete user workflow: Login, selecting Foundry Showcase, workspace initialization, executing a Quick Action (brainstorming prompt), observing streaming thinking loaders/replies, real-time artifact creation/sync, opening the Canvas side-by-side panel, and exploring the real-time Activity Feed panel.",
+    "steps": [
+      "Navigate to the entry URL http://localhost:8082/?enable-semantics=true",
+      "Wait 3 seconds for Next.js rendering and login page loading",
+      "Locate the text input field with label 'Username' and type 'admin'",
+      "Locate the text input field with label 'Password' and type 'admin'",
+      "Locate the button with text 'LOG IN' and click it",
+      "Wait 3 seconds for redirection transition processing and projects list loading",
+      "Verify the dashboard loads and locate the 'Foundry Showcase' card",
+      "Click the project card 'Foundry Showcase' to enter the workspace interface",
+      "Wait 4 seconds for the active workspace, resources, and tabs to load",
+      "Verify that the active tab is 'ANALYSIS' and the sidebar subtitle reads 'WORKSPACE EXPLORER - ANALYSIS PHASE'",
+      "Verify a dynamic chat session is active. If the list is empty, wait for a new default session to auto-create and highlight as 'ACTIVE' in the CHAT SESSIONS menu",
+      "Locate the QUICK ACTIONS section chip with label text 'brainstorming' and click it",
+      "Wait 1 second and verify that the command 'bmad-brainstorming' has been injected into the 'Talk to foundry' message input field",
+      "Locate the send icon button next to the message field and click it to submit the prompt",
+      "Wait 5 seconds for the system response pipeline to connect and trigger the streaming chat",
+      "Observe the dynamic 'EngagingLoader' progress state and the progressive text chunks appearing in the message bubbles",
+      "Wait for the streaming chat response to complete and notice the real-time file-write trigger",
+      "Verify that a new brainstorming spec sheet is successfully registered under the 'GENERATED ARTIFACTS' list in the sidebar",
+      "Locate the newly generated artifact row or title 'Brainstorming Sessions' and click it to inspect",
+      "Wait 3 seconds for the slide-out side-by-side Canvas Pane to open and render the rich markdown text of the brainstorming doc",
+      "Locate the notifications bell icon button in the TopBar and click it to toggle open the real-time Activity Feed sidebar",
+      "Verify that real-time event timeline cards (like the user inputs and workspace synch logs) are listed successfully in the panel",
+      "Take a high-quality visual screenshot of the side-by-side workspace split screen capturing the live project collaboration status",
+      "Terminate the session successfully"
+    ],
+    "recordingName": "scenario_e2e_collaboration"
+  }
+]

@@ -1,0 +1,29 @@
+{
+  "agents": [
+    {
+      "name": "APF System Architect (Winston)",
+      "description": "System architect and technical design leader persona (Winston) focusing on system invariants, data schemas, API boundaries, non-functional requirements, and architectural spikes. Use when the user asks to talk to Winston or requests the architect.",
+      "instructions": "Use fileReaderTool to load the architect persona skill and follow it. The skill is located at .agents/skills/bmad-agent-architect/SKILL.md"
+    },
+    {
+      "name": "APF Create Architecture",
+      "description": "Produces the system architecture spine of invariants, data models, API boundaries, and technical decisions that guide development. Use when the user says 'lets create architecture', 'create technical architecture', 'architecture spine', or 'create a solution design'.",
+      "instructions": "Use fileReaderTool to load the architecture skill and follow it. The skill is located at .agents/skills/bmad-architecture/SKILL.md"
+    },
+    {
+      "name": "APF Create Epics and Stories",
+      "description": "Break requirements into epics and user stories with explicit acceptance criteria. Use when the user says 'create the epics and stories list' or 'break this into stories'.",
+      "instructions": "Use fileReaderTool to load the epics and stories skill and follow it. The skill is located at .agents/skills/bmad-create-epics-and-stories/SKILL.md"
+    },
+    {
+      "name": "APF Review",
+      "description": "Multi-lens review engine over any diff, spec, doc, or artifact (adversarial, edge-case, verification-gap, structure, prose). Use when the user says \"review this\", \"critical review\", \"editorial review\", \"hunt edge cases\", \"review the structure\", or \"review the prose\".",
+      "instructions": "Use fileReaderTool to load the review skill and follow it. The skill is located at .agents/skills/bmad-review/SKILL.md"
+    },
+    {
+      "name": "APF BMad Help Subagent",
+      "description": "Analyzes current state and user query to answer BMad questions or recommend the next skill(s) to use. Use when user asks for help, bmad help, what to do next, or what to start with in BMad.",
+      "instructions": "Use fileReaderTool to load the bmad help skill and follow it. The skill is located at .agents/skills/bmad-help/SKILL.md"
+    }
+  ]
+}

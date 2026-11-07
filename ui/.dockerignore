@@ -1,0 +1,12 @@
+node_modules
+.next
+out
+build
+.git
+.gitignore
+.dockerignore
+.vscode
+.idea
+*.local
+*.tsbuildinfo
+README.md

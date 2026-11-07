@@ -1,0 +1,93 @@
+{
+  "version": "0.2.0",
+  "compounds": [
+    {
+      "name": "Launch All",
+      "configurations": [
+        "Ai",
+        "Api",
+        "Ui"
+      ]
+    },
+    {
+      "name": "Launch Backends",
+      "configurations": [
+        "Ai",
+        "Api"
+      ]
+    }
+  ],
+  "configurations": [
+    {
+      "name": "Ui",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/ui",
+      "runtimeArgs": [
+        "run",
+        "dev"
+      ],
+      "runtimeExecutable": "npm",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "type": "node",
+      "preLaunchTask": "Kill Ui"
+    },
+    {
+      "name": "Ai",
+      "type": "go",
+      "request": "launch",
+      "mode": "auto",
+      "program": "${workspaceFolder}/ai",
+      "preLaunchTask": "Prep Ai",
+      "postDebugTask": "Delete Ai Debug File",
+      "env": {
+        "SERVICE_NAME": "apf",
+        "AGENT_LOADER_NAME": "super",
+        "ARTIFACT_SERVICE_TYPE": "GCS",
+        "CURRENT_USER_NAME": "Foundry User"
+      },
+      "args": [
+        "web",
+        "--port",
+        "8080",
+        "-read-timeout",
+        "5m",
+        "-write-timeout",
+        "5m",
+        "api",
+        "webui"
+      ],
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Api",
+      "type": "go",
+      "request": "launch",
+      "mode": "auto",
+      "program": "${workspaceFolder}/api",
+      "console": "integratedTerminal",
+      "preLaunchTask": "Kill Api",
+      "postDebugTask": "Delete Api Debug File",
+      "cwd": "${workspaceFolder}/api/",
+      "env": {
+        "FIRESTORE_EMULATOR_HOST": "localhost:8084",
+        "LOG_LEVEL": "DEBUG"
+      }
+    },
+    {
+      "name": "Package BMAD",
+      "type": "go",
+      "request": "launch",
+      "mode": "auto",
+      "program": "${workspaceFolder}/third_party/bmad/package.go",
+      "args": [
+        "--install-dir",
+        "${workspaceFolder}/ai/workspaces/config/bmad",
+        "--catalog-file",
+        "${workspaceFolder}/api/seeding/templates/showcase/bmad_catalog.json"
+      ],
+      "console": "integratedTerminal"
+    }
+  ]
+}

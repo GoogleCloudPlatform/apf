@@ -1,0 +1,23 @@
+{
+  "tabName": "ANALYSIS",
+  "quickActionName": "Technical Research",
+  "description": "Conversation fixture for Analysis phase Technical Research skill flow",
+  "fileNamePattern": ".*\\.md",
+  "turns": [
+    {
+      "turnIndex": 1,
+      "agentKeyword": "research options",
+      "userReply": "Evaluate Option C: Go Embedded Filesystem for template storage and provisioning."
+    },
+    {
+      "turnIndex": 2,
+      "agentKeyword": "security",
+      "userReply": "Apply path traversal sanitization and prefix guards on showcase project IDs."
+    },
+    {
+      "turnIndex": 3,
+      "agentKeyword": "continue",
+      "userReply": "Continue"
+    }
+  ]
+}

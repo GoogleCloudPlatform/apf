@@ -1,0 +1,34 @@
+{
+  "agents": [
+    {
+      "name": "APF Sprint Planning",
+      "description": "Gate planning readiness, generate sprint status tracking from epics, summarize sprint progress, and validate or repair tracking. Use when the user says \"run sprint planning\" or \"generate sprint plan\"",
+      "instructions": "Use fileReaderTool to load the sprint planning skill and follow it. The skill is located at .agents/skills/bmad-sprint-planning/SKILL.md"
+    },
+    {
+      "name": "APF Correct Course",
+      "description": "Manage significant changes during sprint execution. Use when the user says \"correct course\" or \"propose sprint change\"",
+      "instructions": "Use fileReaderTool to load the correct course skill and follow it. The skill is located at .agents/skills/bmad-correct-course/SKILL.md"
+    },
+    {
+      "name": "APF Master Test Architect (Murat)",
+      "description": "Master Test Architect and Quality Advisor persona (Murat) providing test architecture strategy, ATDD design, NFR evaluation, and test suite reviews. Use when the user asks to talk to Murat or requests the Test Architect.",
+      "instructions": "Use fileReaderTool to load the test architect persona skill and follow it. The skill is located at .agents/skills/bmad-tea/SKILL.md"
+    },
+    {
+      "name": "APF Retrospective",
+      "description": "Post-epic review to extract lessons and assess success. Use when the user says \"run a retrospective\" or \"lets retro the epic [epic]\"",
+      "instructions": "Use fileReaderTool to load the retrospective skill and follow it. The skill is located at .agents/skills/bmad-retrospective/SKILL.md"
+    },
+    {
+      "name": "APF Review",
+      "description": "Multi-lens review engine over any diff, spec, doc, or artifact (adversarial, edge-case, verification-gap, structure, prose). Use when the user says \"review this\", \"critical review\", \"editorial review\", \"hunt edge cases\", \"review the structure\", or \"review the prose\".",
+      "instructions": "Use fileReaderTool to load the review skill and follow it. The skill is located at .agents/skills/bmad-review/SKILL.md"
+    },
+    {
+      "name": "APF BMad Help Subagent",
+      "description": "Analyzes current state and user query to answer BMad questions or recommend the next skill(s) to use. Use when user asks for help, bmad help, what to do next, or what to start with in BMad.",
+      "instructions": "Use fileReaderTool to load the bmad help skill and follow it. The skill is located at .agents/skills/bmad-help/SKILL.md"
+    }
+  ]
+}

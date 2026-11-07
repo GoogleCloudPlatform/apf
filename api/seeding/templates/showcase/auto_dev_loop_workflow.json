@@ -1,0 +1,347 @@
+{
+  "id": "KdDOjFLKeL6hudV9HATr",
+  "name": "dev_loop",
+  "displayName": "Autonomous Dev Loop",
+  "description": "",
+  "framework": "ADK",
+  "phases": {},
+  "artifacts": {},
+  "dependencies": {},
+  "nodes": [
+    {
+      "id": "loop-1782049376477",
+      "name": "loop_items",
+      "displayName": "Until Fixed",
+      "type": "loop",
+      "description": "Iterate over a collection",
+      "rerunOnResume": false,
+      "waitForOutput": false,
+      "exitCondition": {
+        "!=": [
+          {
+            "var": "sprint_status"
+          },
+          "done"
+        ]
+      }
+    },
+    {
+      "id": "agent-1782049388931",
+      "name": "software_developer",
+      "displayName": "Implement Story",
+      "type": "agent",
+      "description": "Code implementation, story execution, and unit testing.",
+      "rerunOnResume": false,
+      "waitForOutput": false,
+      "model": "gemini-2.5-pro",
+      "instruction": "You are playing the role of Software Developer. Code implementation, story execution, and unit testing.",
+      "skills": [],
+      "tools": []
+    },
+    {
+      "id": "agent-1782057327333",
+      "name": "qa_tester",
+      "displayName": "Code Review",
+      "type": "agent",
+      "description": "Generates test cases, runs automated QA, verifies stories, and tracks bugs.",
+      "rerunOnResume": false,
+      "waitForOutput": false,
+      "model": "gemini-2.5-flash",
+      "instruction": "You are playing the role of QA Tester. Generates test cases, runs automated QA, verifies stories, and tracks bugs.",
+      "skills": [],
+      "tools": []
+    },
+    {
+      "id": "agent-1782057349857",
+      "name": "security_defender",
+      "displayName": "Security Review",
+      "type": "agent",
+      "description": "Audits code security, scans vulnerabilities, models threats, and enforces guardrails.",
+      "rerunOnResume": false,
+      "waitForOutput": false,
+      "model": "gemini-2.5-flash",
+      "instruction": "You are playing the role of Security Defender. Audits code security, scans vulnerabilities, models threats, and enforces guardrails.",
+      "skills": [],
+      "tools": []
+    },
+    {
+      "id": "agent-1782057398811",
+      "name": "software_developer_merger",
+      "displayName": "Merge Changes",
+      "type": "agent",
+      "description": "Code implementation, story execution, and unit testing.",
+      "rerunOnResume": false,
+      "waitForOutput": false,
+      "model": "gemini-2.5-flash",
+      "instruction": "You are playing the role of Software Developer. Code implementation, story execution, and unit testing.",
+      "skills": [],
+      "tools": []
+    },
+    {
+      "id": "agent-1782057548909",
+      "name": "product_manager",
+      "displayName": "Create Story",
+      "type": "agent",
+      "description": "PRD creation, requirements discovery, and scope management.",
+      "rerunOnResume": false,
+      "waitForOutput": false,
+      "model": "gemini-2.5-flash",
+      "instruction": "You are playing the role of Product Manager. PRD creation, requirements discovery, and scope management.",
+      "skills": [],
+      "tools": []
+    },
+    {
+      "id": "manual_trigger-1782064300883",
+      "name": "manual_run",
+      "displayName": "Manual Trigger",
+      "type": "manual_trigger",
+      "description": "Manually trigger the workflow",
+      "rerunOnResume": false,
+      "waitForOutput": false
+    },
+    {
+      "id": "agent-1782065671086",
+      "name": "qa_tester_1",
+      "displayName": "End 2 End Test",
+      "type": "agent",
+      "description": "Generates test cases, runs automated QA, verifies stories, and tracks bugs.",
+      "rerunOnResume": false,
+      "waitForOutput": false,
+      "model": "gemini-2.5-flash",
+      "instruction": "You are playing the role of QA Tester. Generates test cases, runs automated QA, verifies stories, and tracks bugs.",
+      "skills": [],
+      "tools": []
+    },
+    {
+      "id": "start",
+      "name": "START",
+      "displayName": "START",
+      "type": "custom",
+      "description": "Auto-injected entry point"
+    }
+  ],
+  "edges": [
+    {
+      "id": "loop-1782049376477->agent-1782049388931",
+      "fromNode": "loop-1782049376477",
+      "toNode": "agent-1782049388931",
+      "route": "loop"
+    },
+    {
+      "id": "loop-1782049376477->agent-1782057398811",
+      "fromNode": "loop-1782049376477",
+      "toNode": "agent-1782057398811",
+      "route": "done"
+    },
+    {
+      "id": "agent-1782049388931->agent-1782057327333",
+      "fromNode": "agent-1782049388931",
+      "toNode": "agent-1782057327333"
+    },
+    {
+      "id": "agent-1782049388931->agent-1782057349857",
+      "fromNode": "agent-1782049388931",
+      "toNode": "agent-1782057349857"
+    },
+    {
+      "id": "agent-1782057327333->loop-1782049376477",
+      "fromNode": "agent-1782057327333",
+      "toNode": "loop-1782049376477"
+    },
+    {
+      "id": "agent-1782057349857->loop-1782049376477",
+      "fromNode": "agent-1782057349857",
+      "toNode": "loop-1782049376477"
+    },
+    {
+      "id": "agent-1782057398811->agent-1782065671086",
+      "fromNode": "agent-1782057398811",
+      "toNode": "agent-1782065671086"
+    },
+    {
+      "id": "agent-1782057548909->loop-1782049376477",
+      "fromNode": "agent-1782057548909",
+      "toNode": "loop-1782049376477"
+    },
+    {
+      "id": "manual_trigger-1782064300883->agent-1782057548909",
+      "fromNode": "manual_trigger-1782064300883",
+      "toNode": "agent-1782057548909"
+    },
+    {
+      "id": "start->manual_trigger-1782064300883",
+      "fromNode": "start",
+      "toNode": "manual_trigger-1782064300883"
+    }
+  ],
+  "layout": {
+    "nodes": [
+      {
+        "id": "loop-1782049376477",
+        "type": "loop",
+        "position": {
+          "x": -294,
+          "y": 42
+        },
+        "data": {
+          "name": "loop_items",
+          "displayName": "Until Fixed"
+        }
+      },
+      {
+        "id": "agent-1782049388931",
+        "type": "agent",
+        "position": {
+          "x": 0,
+          "y": 224
+        },
+        "data": {
+          "name": "software_developer",
+          "displayName": "Implement Story"
+        }
+      },
+      {
+        "id": "noop-1782049532360",
+        "type": "noop",
+        "position": {
+          "x": 336,
+          "y": 602
+        },
+        "orientation": "RL",
+        "data": {
+          "name": "noop_route",
+          "displayName": "Noop Node"
+        }
+      },
+      {
+        "id": "agent-1782057327333",
+        "type": "agent",
+        "position": {
+          "x": 238,
+          "y": 224
+        },
+        "data": {
+          "name": "qa_tester",
+          "displayName": "Code Review"
+        }
+      },
+      {
+        "id": "agent-1782057349857",
+        "type": "agent",
+        "position": {
+          "x": 238,
+          "y": 420
+        },
+        "data": {
+          "name": "security_defender",
+          "displayName": "Security Review"
+        }
+      },
+      {
+        "id": "agent-1782057398811",
+        "type": "agent",
+        "position": {
+          "x": 0,
+          "y": -42
+        },
+        "data": {
+          "name": "software_developer_merger",
+          "displayName": "Merge Changes"
+        }
+      },
+      {
+        "id": "agent-1782057548909",
+        "type": "agent",
+        "position": {
+          "x": -532,
+          "y": 42
+        },
+        "data": {
+          "name": "product_manager",
+          "displayName": "Create Story"
+        }
+      },
+      {
+        "id": "manual_trigger-1782064300883",
+        "type": "manual_trigger",
+        "position": {
+          "x": -672,
+          "y": 70
+        },
+        "data": {
+          "name": "manual_run",
+          "displayName": "Manual Trigger"
+        }
+      },
+      {
+        "id": "agent-1782065671086",
+        "type": "agent",
+        "position": {
+          "x": 294,
+          "y": -42
+        },
+        "data": {
+          "name": "qa_tester_1",
+          "displayName": "End 2 End Test"
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "xy-edge__loop-1782049376477loop-agent-1782049388931",
+        "source": "loop-1782049376477",
+        "target": "agent-1782049388931",
+        "sourceHandle": "loop"
+      },
+      {
+        "id": "xy-edge__noop-1782049532360source-loop-1782049376477",
+        "source": "noop-1782049532360",
+        "target": "loop-1782049376477",
+        "sourceHandle": "source"
+      },
+      {
+        "id": "xy-edge__agent-1782049388931-agent-1782057327333",
+        "source": "agent-1782049388931",
+        "target": "agent-1782057327333"
+      },
+      {
+        "id": "xy-edge__agent-1782057327333-noop-1782049532360target",
+        "source": "agent-1782057327333",
+        "target": "noop-1782049532360",
+        "targetHandle": "target"
+      },
+      {
+        "id": "xy-edge__agent-1782049388931-agent-1782057349857",
+        "source": "agent-1782049388931",
+        "target": "agent-1782057349857"
+      },
+      {
+        "id": "xy-edge__agent-1782057349857-noop-1782049532360target",
+        "source": "agent-1782057349857",
+        "target": "noop-1782049532360",
+        "targetHandle": "target"
+      },
+      {
+        "id": "xy-edge__loop-1782049376477done-agent-1782057398811",
+        "source": "loop-1782049376477",
+        "target": "agent-1782057398811",
+        "sourceHandle": "done"
+      },
+      {
+        "id": "xy-edge__agent-1782057548909-loop-1782049376477",
+        "source": "agent-1782057548909",
+        "target": "loop-1782049376477"
+      },
+      {
+        "id": "xy-edge__manual_trigger-1782064300883-agent-1782057548909",
+        "source": "manual_trigger-1782064300883",
+        "target": "agent-1782057548909"
+      },
+      {
+        "id": "xy-edge__agent-1782057398811-agent-1782065671086",
+        "source": "agent-1782057398811",
+        "target": "agent-1782065671086"
+      }
+    ]
+  }
+}

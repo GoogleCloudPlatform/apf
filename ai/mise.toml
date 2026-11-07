@@ -1,0 +1,33 @@
+# Copyright 2026 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+[tools]
+go = "1.26.1"
+air = "latest"
+
+[tasks.dev]
+description = "Run Go AI backend locally with hot reload (air)"
+run = "air"
+
+[tasks.run]
+description = "Run Go AI backend directly (matches VSCode 'Ai' launch config)"
+run = "go run . web --port 8080 -read-timeout 5m -write-timeout 5m api webui"
+
+[tasks.lint]
+description = "Run Go linter for AI service"
+run = "golangci-lint run"
+
+[tasks.test]
+description = "Run Go unit tests for AI service"
+run = "go test ./..."

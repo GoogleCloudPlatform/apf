@@ -1,0 +1,28 @@
+{
+  "tabName": "ONBOARDING",
+  "quickActionName": "Project Context",
+  "description": "Conversation fixture populated from local postgres session 6WhzmzMMXKNhgGvGpjSi",
+  "fileNamePattern": "agents.md",
+  "turns": [
+    {
+      "turnIndex": 1,
+      "agentKeyword": "Hello! I am the **APF Generate Project Context** agent. I'm here to help you set up the AGENTS.md file",
+      "userReply": "Purpose: A browser based, complete application development environment.\nTech Stack: React front end, Go middleware, Postgres database"
+    },
+    {
+      "turnIndex": 2,
+      "agentKeyword": "Thanks for that information. Since the repository appears to be in an early state (greenfield)",
+      "userReply": "Policies: Trunk based development, Create Conventional Commits using AI, Always create a PR, Use main branch for release"
+    },
+    {
+      "turnIndex": 3,
+      "agentKeyword": "Based on the details provided and a scan of the repository, here is the proposed AGENTS.md block",
+      "userReply": "Let's save what we have for now"
+    },
+    {
+      "turnIndex": 4,
+      "agentKeyword": "I have successfully created the AGENTS.md file with the agreed-upon project context.",
+      "userReply": "All good"
+    }
+  ]
+}

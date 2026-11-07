@@ -1,0 +1,133 @@
+# Copyright 2026 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: placeholder-api # from-param: ${prefix}-api
+  annotations:
+    run.googleapis.com/ingress: internal-and-cloud-load-balancing
+    run.googleapis.com/invoker-iam-disabled: "true"
+    run.googleapis.com/sessionAffinity: "true"
+spec:
+  template:
+    metadata:
+      annotations:
+        run.googleapis.com/network-interfaces: placeholder-network-interfaces # from-param: ${network_interfaces}
+        run.googleapis.com/vpc-access-egress: all-traffic
+        run.googleapis.com/cloudsql-instances: placeholder-connection # from-param: ${cloudsql_connection}
+        autoscaling.knative.dev/minScale: "1"
+        autoscaling.knative.dev/maxScale: "10"
+        run.googleapis.com/cpu-throttling: "false"
+        run.googleapis.com/execution-environment: gen2
+    spec:
+      serviceAccountName: placeholder-service-account # from-param: ${service_account}
+      containers:
+        - image: apf-api
+          name: api
+          ports:
+            - containerPort: 8081
+          resources:
+            limits:
+              cpu: "2"
+              memory: 8Gi
+          env:
+            - name: GOOGLE_CLOUD_PROJECT
+              value: placeholder-project # from-param: ${project_id}
+            - name: GOOGLE_CLOUD_LOCATION
+              value: placeholder-location # from-param: ${cloud_location}
+            - name: SERVICE_NAME
+              value: "apf-api"
+            - name: ARTIFACT_SERVICE_TYPE
+              value: "FILE"
+            - name: GCS_ARTIFACT_BUCKET
+              value: placeholder-bucket # from-param: ${artifact_bucket}
+            - name: AGENT_BASE_URL
+              value: placeholder-url # from-param: ${agent_base_url}
+            - name: APP_URL
+              value: placeholder-url # from-param: ${app_external_url}
+            - name: WORKSPACE_MOUNT_PATH
+              value: "/workspaces"
+            - name: MAINTENANCE_JOB_NAME
+              value: placeholder-jobs # from-param: ${prefix}-jobs
+            - name: BMAD_ROOT_PATH
+              value: "/config/bmad"
+            - name: BMAD_PLANNING_ARTIFACTS_PATH
+              value: "plans"
+            - name: BMAD_IMPLEMENTATION_ARTIFACTS_PATH
+              value: "implementation"
+            - name: FIRESTORE_DB_NAME
+              value: placeholder-db # from-param: ${firestore_db_name}
+            - name: SECRETS_ENCRYPTION_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: "latest"
+                  name: placeholder-secrets-encryption-key # from-param: ${secrets_encryption_key}
+            - name: SECRET_ENCRYPTION_PUBLIC_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: "latest"
+                  name: placeholder-secret-encryption-public-key # from-param: ${secret_encryption_public_key}
+            - name: PERF_TEST_MODE
+              value: "false" # from-param: ${perf_test_mode}
+            - name: GITHUB_CLIENT_ID
+              value: placeholder-github-client-id # from-param: ${github_client_id}
+            - name: GITHUB_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  key: "latest"
+                  name: placeholder-github-client-secret # from-param: ${github_client_secret}
+            - name: ENVIRONMENT
+              value: placeholder-env # from-param: ${environment}
+            - name: BYPASS_IAP_VALIDATION
+              value: "false" # from-param: ${bypass_iap_validation}
+            - name: PERF_TEST_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: "latest"
+                  name: placeholder-perf-test-key # from-param: ${perf_test_key}
+            - name: IAP_AUDIENCE
+              value: placeholder-iap-audience # from-param: ${iap_audience}
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  key: "latest"
+                  name: placeholder-jwt-secret # from-param: ${jwt_secret}
+            - name: SUPER_ADMIN_EMAILS
+              valueFrom:
+                secretKeyRef:
+                  key: "latest"
+                  name: placeholder-super-admin-emails # from-param: ${super_admin_emails}
+            - name: CLOUDSQL_CONNECTION_NAME
+              value: placeholder-connection # from-param: ${cloudsql_connection}
+            - name: CLOUDSQL_USER
+              value: placeholder-user # from-param: ${cloudsql_user}
+            - name: CLOUDSQL_DATABASE
+              value: placeholder-database # from-param: ${cloudsql_database}
+            - name: CLOUDSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: "latest"
+                  name: placeholder-secret # from-param: ${cloudsql_password_secret}
+            - name: SESSION_SERVICE_TYPE
+              value: placeholder-session-service # from-param: ${session_service_type}
+          volumeMounts:
+            - name: workspaces
+              mountPath: /workspaces
+      volumes:
+        - name: workspaces
+          nfs:
+            server: placeholder-nfs-server # from-param: ${nfs_server}
+            path: placeholder-nfs-path # from-param: ${nfs_path}
+            readOnly: false

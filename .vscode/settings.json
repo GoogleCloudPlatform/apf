@@ -1,0 +1,17 @@
+{
+  "go.testFlags":  [
+    
+    ],
+  
+  "go.formatTool": "gofmt",
+  "[go]": {
+    "editor.defaultFormatter": "golang.go",
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "file",
+    "editor.codeActionsOnSave": {
+      "quickfix.insertSemicolon": "always",
+      "source.organizeImports": "always"
+    }
+  },
+  "explorer.excludeGitIgnore": true
+}

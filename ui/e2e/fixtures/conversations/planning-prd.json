@@ -1,0 +1,23 @@
+{
+  "tabName": "PLANNING",
+  "quickActionName": "Create PRD",
+  "description": "Conversation fixture for Planning phase Create PRD skill flow",
+  "fileNamePattern": "prd\\.md",
+  "turns": [
+    {
+      "turnIndex": 1,
+      "agentKeyword": "executive summary",
+      "userReply": "Define sub-10 second onboarding acceleration with zero-configuration provisioning."
+    },
+    {
+      "turnIndex": 2,
+      "agentKeyword": "user journeys",
+      "userReply": "Include provisioning from Settings modal and instant reset to default state."
+    },
+    {
+      "turnIndex": 3,
+      "agentKeyword": "proceed",
+      "userReply": "Proceed"
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+[
+  {
+    "displayName": "Brainstorming",
+    "name": "brainstorming",
+    "description": "Facilitate interactive brainstorming sessions using diverse creative techniques and ideation methods."
+  },
+  {
+    "displayName": "Domain Research",
+    "name": "domain_research",
+    "description": "Conduct domain and industry research to gather background context and trends."
+  },
+  {
+    "displayName": "Market Research",
+    "name": "market_research",
+    "description": "Conduct market research on competition, customers, and market sizing."
+  },
+  {
+    "displayName": "Technical Research",
+    "name": "technical_research",
+    "description": "Conduct technical research on technologies, frameworks, and architecture patterns."
+  },
+  {
+    "displayName": "Product Brief",
+    "name": "product_brief",
+    "description": "Create, update, or validate a high-level product brief outlining vision and goals."
+  },
+  {
+    "displayName": "Create PRD",
+    "name": "create_prd",
+    "description": "Author, update, or validate a comprehensive Product Requirements Document."
+  },
+  {
+    "displayName": "Create UX Design",
+    "name": "create_ux_design",
+    "description": "Plan user experience patterns, flows, and interface design specifications."
+  },
+  {
+    "displayName": "Create Architecture",
+    "name": "create_architecture",
+    "description": "Create technical architecture designs and system solution decisions."
+  },
+  {
+    "displayName": "Create Epics",
+    "name": "create_epics",
+    "description": "Deconstruct product requirements into epics and actionable user stories."
+  },
+  {
+    "displayName": "Create Story",
+    "name": "bmad_create_story",
+    "description": "Create a dedicated, context-filled story specification file for implementation."
+  },
+  {
+    "displayName": "Implement Story",
+    "name": "implement_story",
+    "description": "Execute code implementation and unit testing following a story specification."
+  },
+  {
+    "displayName": "Code Review",
+    "name": "code_review",
+    "description": "Review code changes adversarially for quality, security, and edge cases."
+  },
+  {
+    "displayName": "Sprint Planning",
+    "name": "sprint_planning",
+    "description": "Generate sprint status tracking and schedule stories from epics."
+  },
+  {
+    "displayName": "Correct Course",
+    "name": "correct_course",
+    "description": "Manage significant changes, risk mitigations, and plan adjustments during sprint execution."
+  },
+  {
+    "displayName": "Retrospective",
+    "name": "retrospective",
+    "description": "Conduct post-epic reviews to extract key lessons, improvements, and assess success metrics."
+  }
+]

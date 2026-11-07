@@ -1,0 +1,78 @@
+[
+  {
+    "id": "scenario-auth-login",
+    "name": "Admin User Login Flow",
+    "url": "http://localhost:8082/?enable-semantics=true",
+    "description": "Verifies that an administrative user can log in successfully with development credentials and is redirected to the projects landing page.",
+    "steps": [
+      "Navigate to the entry URL http://localhost:8082/?enable-semantics=true",
+      "Wait 3 seconds for Next.js rendering and login screen redirect",
+      "Locate the text input with label 'Username' and type 'admin'",
+      "Locate the text input with label 'Password' and type 'admin'",
+      "Locate the FilledButton or element with text 'LOG IN' and click it",
+      "Wait 3 seconds for redirect transition processing",
+      "Verify the browser URL path updates to '/projects' and the header or page text 'Projects' is visible"
+    ],
+    "recordingName": "scenario_auth_login"
+  },
+  {
+    "id": "scenario-theme-toggle",
+    "name": "Visual Theme Mode Toggle Preference",
+    "url": "http://localhost:8082/settings?enable-semantics=true",
+    "description": "Verifies that users can toggle between light and dark theme modes and settings are applied instantly.",
+    "steps": [
+      "Navigate to the settings URL http://localhost:8082/settings?enable-semantics=true",
+      "Wait 3 seconds for the screen to redirect to the login screen and render",
+      "Locate the text input with label 'Username' and type 'admin'",
+      "Locate the text input with label 'Password' and type 'admin'",
+      "Locate the FilledButton or element with text 'LOG IN' and click it",
+      "Wait 3 seconds for login to complete and redirect to the projects landing page",
+      "Navigate to the settings URL http://localhost:8082/settings?enable-semantics=true",
+      "Wait 3 seconds for the settings screen to load",
+      "Locate the 'Sleek Light Mode' theme option card and click it",
+      "Verify the light theme radio option becomes selected",
+      "Locate the 'Premium Dark Mode' theme option card and click it",
+      "Verify the dark theme radio option becomes selected and the workspace shifts to dark background colors"
+    ],
+    "recordingName": "scenario_theme_toggle"
+  },
+  {
+    "id": "scenario-credentials-navigation",
+    "name": "Settings Application Credentials Navigation",
+    "url": "http://localhost:8082/settings?enable-semantics=true",
+    "description": "Verifies that clicking the Application Credentials link in settings successfully scrolls the credentials configurations into view.",
+    "steps": [
+      "Navigate to the settings URL http://localhost:8082/settings?enable-semantics=true",
+      "Wait 3 seconds for the screen to redirect to the login screen and render",
+      "Locate the text input with label 'Username' and type 'admin'",
+      "Locate the text input with label 'Password' and type 'admin'",
+      "Locate the FilledButton or element with text 'LOG IN' and click it",
+      "Wait 3 seconds for login to complete and redirect to the projects landing page",
+      "Navigate to the settings URL http://localhost:8082/settings?enable-semantics=true",
+      "Wait 3 seconds for the settings screen to load",
+      "Locate the sidebar item with text 'Application Credentials' and click it",
+      "Wait 1 second for the smooth scrolling viewport alignment to complete",
+      "Verify that the main panel header 'Application Credentials' and secure integrations list (like GitHub) is visible"
+    ],
+    "recordingName": "scenario_credentials_navigation"
+  },
+  {
+    "id": "scenario-project-workspace-navigation",
+    "name": "Project List to Workspace Navigation Flow",
+    "url": "http://localhost:8082/projects?enable-semantics=true",
+    "description": "Verifies that clicking an existing project from the main projects board successfully routes to the workspace detail interface.",
+    "steps": [
+      "Navigate to the projects list URL http://localhost:8082/projects?enable-semantics=true",
+      "Wait 3 seconds for the screen to redirect to the login screen and render",
+      "Locate the text input with label 'Username' and type 'admin'",
+      "Locate the text input with label 'Password' and type 'admin'",
+      "Locate the FilledButton or element with text 'LOG IN' and click it",
+      "Wait 3 seconds for login to complete and redirect to the projects landing page",
+      "Wait 3 seconds for the projects data query to return cards",
+      "Locate the project card with title 'Foundry Showcase' and click it",
+      "Wait 3 seconds for transition to workspace and resource configurations loading",
+      "Verify the active workspace dashboard page loads and standard subcomponents (Chat Pane, Canvas Pane) are visible"
+    ],
+    "recordingName": "scenario_workspace_navigation"
+  }
+]

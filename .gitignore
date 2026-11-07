@@ -1,0 +1,388 @@
+# ==============================================================================
+# 1. System, IDEs & Editor Files
+# ==============================================================================
+
+# Operating System Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+
+# JetBrains / PyCharm / GoLand / WebStorm
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Visual Studio Code
+.vscode/*.log
+.vscode/.browse.*
+.vscode/xcuserdata
+*.code-workspace
+.history/
+
+# Cursor AI Editor
+.cursorignore
+.cursorindexingignore
+
+# Vim / Neovim / Emacs / Sublime Text
+*.swp
+*.swo
+*.swn
+*.swm
+*.swl
+.*.sw[a-p]
+.*.un~
+Session.vim
+.netrwhist
+*#
+.#*
+*.sublime-workspace
+*.sublime-project
+
+# Jupyter Notebook & IPython
+.ipynb_checkpoints
+profile_default/
+ipython_config.py
+
+# Spyder & Rope
+.spyderproject
+.spyproject
+.ropeproject
+
+
+# ==============================================================================
+# 2. Environments, Package Managers & Global Tooling
+# ==============================================================================
+
+# Environment variable files
+*config.env
+.env
+.env*.local
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.env.local
+*.local.env
+.envrc
+
+# Local Tool Overrides & Docker Overrides
+.mise.local.toml
+mise.local.toml
+docker-compose.override.yml
+docker-compose.override.yaml
+
+# Certificates, Keys & Cloud Credentials
+*.pem
+*.key
+*.cert
+*.crt
+*.pfx
+*.p12
+*service-account*.json
+*.sa.json
+
+# Python Virtual Environments
+.venv
+.venv*/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# PEP 582 (pyflow, pdm)
+__pypackages__/
+
+# pyenv
+# .python-version
+
+# pipenv
+#Pipfile.lock
+
+# uv
+#uv.lock
+
+# poetry
+#poetry.lock
+#poetry.toml
+
+# pdm
+#pdm.lock
+#pdm.toml
+.pdm-python
+.pdm-build/
+
+# pixi
+#pixi.lock
+.pixi
+
+
+# ==============================================================================
+# 3. Programming Languages: Python
+# ==============================================================================
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[codz]
+*.pyo
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+.pypirc
+pip-wheel-metadata/
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py.cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# Typing, Linting, Formatting & Static Analysis
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+.pytype/
+cython_debug/
+.ruff_cache/
+.pyright/
+
+# Translations
+*.mo
+*.pot
+
+# Frameworks, Databases & Logs
+*.log
+logs/
+/logs/
+*-debug.log
+*debug.log
+local_settings.py
+*.sqlite
+*.sqlite3
+*.sqlite-shm
+*.sqlite-wal
+*.sqlite3-shm
+*.sqlite3-wal
+*.db-shm
+*.db-wal
+*.db-journal
+db.sqlite3
+db.sqlite3-journal
+instance/
+.webassets-cache
+.scrapy
+docs/_build/
+.pybuilder/
+target/
+celerybeat-schedule
+celerybeat.pid
+*.sage.py
+marimo/_static/
+marimo/_lsp/
+__marimo__/
+.abstra/
+
+
+# ==============================================================================
+# 4. Programming Languages: Go (Golang)
+# ==============================================================================
+
+# General Temporary directory
+tmp/
+
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Compiled Go application binaries (Agentic Foundry specific)
+bin/
+api/api
+ai/ai
+ai/apf
+runners/tmux/tmux
+runners/tmux/tmux-runner
+tmux-runner
+api/cmd/migrate/migrate
+api/cmd/seed_project/seed_project
+api/cmd/jobs/jobs
+
+# Test binary, built with `go test -c`
+*.test
+
+# Code coverage profiles and other test artifacts
+*.out
+coverage.*
+*.coverprofile
+profile.cov
+
+# Dependency directories (uncomment to ignore vendor directory)
+# vendor/
+
+# Go workspace file
+go.work.sum
+__debug*
+
+
+# ==============================================================================
+# 5. Programming Languages: Node.js / Frontend
+# ==============================================================================
+
+node_modules/
+.next/
+out/
+.open-next/
+.swc/
+.turbo/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+.pnpm-store/
+.yarn/cache
+.yarn/unplugged
+coverage/
+.nyc_output/
+.vitest/
+.vitest-cache/
+playwright-report/
+test-results/
+blob-report/
+playwright/.cache/
+bmad/node_modules/
+*.tsbuildinfo
+
+# Allow ui/src/lib even if subdirectories are ignored
+!ui/src/lib/
+
+
+# ==============================================================================
+# 6. Infrastructure & DevOps (Terraform, Skaffold, Firebase)
+# ==============================================================================
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.backup
+*.tfvars
+!*.tfvars.example
+*.tfvars.json
+.terraform.lock.hcl
+crash.log
+crash.*.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Firebase
+.firebase/
+
+# Skaffold
+.skaffold/
+skaffold
+
+# CI/CD Environment Targets (Internal Infrastructure Secrets & Parameters)
+infra/cicd/environments/*.yaml
+!infra/cicd/environments/*.example.yaml
+
+
+# ==============================================================================
+# 7. Project-Specific (Agentic Foundry, ADK, BMad, Runner/tmux)
+# ==============================================================================
+
+# BMad & ADK Orchestration
+/_adk/
+/_bmad-output
+/.adk/
+/.agents/
+sessions.db
+
+# tmux Runner Temp Files
+.dev_*.sh
+.done_*
+devloop.config
+
+# Workspaces & CLI state
+.workspaces
+workspaces/
+.jetskicli/
+
+# Developer Specs
+*dev-spec
+
+# Scripts, agents and scratchpads
+install.sh
+.agent/
+scratch/
+runners/tmux/factory
+api/server
+
+# Performance Testing
+perf/reports/*
+!perf/reports/.gitkeep
+perf/test-results/*
+!perf/test-results/.gitkeep
+
+# ADK 2 & Root BMad Overrides
+runners/adk/.agy/
+**/localized_config/
+**/.agy
+bmad2
+/_bmad/
+/.bmad-loop/

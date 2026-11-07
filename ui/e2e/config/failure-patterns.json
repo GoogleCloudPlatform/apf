@@ -1,0 +1,14 @@
+[
+  "(?i)internal server error",
+  "(?i)failed to execute",
+  "(?i)tool execution failed",
+  "(?i)unhandled exception",
+  "(?i)command failed with exit code",
+  "(?i)connection refused",
+  "(?i)rate limit exceeded",
+  "(?i)initialization failed",
+  "(?i)api key.*(missing|invalid|expired)",
+  "(?i)fatal error",
+  "(?i)panic:",
+  "(?i)traceback \\(most recent call last\\)"
+]
