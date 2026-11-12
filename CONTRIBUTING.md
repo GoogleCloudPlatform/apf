@@ -47,7 +47,7 @@ information on using pull requests.
   - [Step 3: Spin Up the Local Stack (`mise run local`)](#step-3-spin-up-the-local-stack-mise-run-local)
   - [Local Simulation Login Credentials](#-local-simulation-login-credentials)
   - [Daily Maintenance & Cleanup Workflows](#-daily-maintenance--cleanup-workflows)
-  - [IDE Launch Parity (VS Code / Jetski)](#-ide-launch-parity-vs-code--jetski)
+  - [IDE Launch Parity (VS Code / Antigravity)](#-ide-launch-parity-vs-code--antigravity)
   - [Troubleshooting](#-troubleshooting)
 - 🏗️ **[Repository Architecture](#️-repository-architecture)**
 - 🔀 **[Your First Code Contribution (PR Workflow)](#-your-first-code-contribution-pr-workflow)**
@@ -188,9 +188,9 @@ mise run clean
 
 ---
 
-### 🖥️ IDE Launch Parity (VS Code / Jetski)
+### 🖥️ IDE Launch Parity (VS Code / Antigravity)
 
-If you prefer VS Code or Jetski workflows, you can trigger these tasks from the IDE:
+If you prefer VS Code or Antigravity workflows, you can trigger these tasks from the IDE:
 - Open the Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`), select **Tasks: Run Task**, and choose:
   - `🚀 Launch All Services (Mise)`
   - `🗄️ Launch Local Databases & Seed (Part 1)`
